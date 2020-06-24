@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2020-06-24T06:59:04.258Z</updated>
+  <updated>2020-06-24T09:02:32.883Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RocketMQ 消息存储的设计与实现</title>
+    <link href="http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html"/>
+    <id>http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</id>
+    <published>2020-06-24T09:01:25.741Z</published>
+    <updated>2020-06-24T09:02:32.883Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计、消息从 Broker 接收到持久化磁盘的流程、刷盘策略和内存映射优化机制。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 To
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+      <category term="RocketMQ" scheme="http://xingcici.github.io/tags/RocketMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解 JAVA 反序列化漏洞</title>

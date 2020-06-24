@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</loc>
+    
+    <lastmod>2020-06-24T09:02:32.883Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xingcici.github.io/categories/index.html</loc>
     
     <lastmod>2020-06-24T07:43:54.601Z</lastmod>

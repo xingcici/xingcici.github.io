@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Linux命令学习 | 一方天地</title>
-  <meta name="description" content="Linux命令大全">
+  <title>RocketMQ 消息存储的设计与实现 | 一方天地</title>
+  <meta name="description" content="作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux命令学习">
-<meta property="og:url" content="http://xingcici.github.io/2020/06/23/linux-command-learning.html">
+<meta property="og:title" content="RocketMQ 消息存储的设计与实现">
+<meta property="og:url" content="http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="Linux命令大全">
+<meta property="og:description" content="作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-23T06:16:36.652Z">
-<meta property="article:modified_time" content="2020-06-24T06:59:04.203Z">
+<meta property="article:published_time" content="2020-06-24T09:01:25.741Z">
+<meta property="article:modified_time" content="2020-06-24T09:02:32.883Z">
 <meta property="article:author" content="行词">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="RocketMQ">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/2020/06/23/linux-command-learning.html">
+  <link rel="canonical" href="http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -302,14 +302,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Linux命令学习" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-RocketMQ 消息存储的设计与实现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Linux命令学习
+      RocketMQ 消息存储的设计与实现
     </h1>
   
 
@@ -317,20 +317,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/06/23/linux-command-learning.html" class="article-date">
-	  <time datetime="2020-06-23T06:16:36.652Z" itemprop="datePublished">2020-06-23</time>
+	<a href="/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html" class="article-date">
+	  <time datetime="2020-06-24T09:01:25.741Z" itemprop="datePublished">2020-06-24</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/linux/" rel="tag">linux</a>
+	<a class="article-tag-link" href="/tags/RocketMQ/" rel="tag">RocketMQ</a>
   </span>
 
 
@@ -343,10 +343,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/23/linux-command-learning.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 153(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -356,7 +356,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Linux命令大全"><a href="#Linux命令大全" class="headerlink" title="Linux命令大全"></a><a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener">Linux命令大全</a></h3>
+        <p>作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计、消息从 Broker 接收到持久化磁盘的流程、刷盘策略和内存映射优化机制。</p>
+
       
     </div>
     <div class="article-footer">
@@ -365,7 +366,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://xingcici.github.io/2020/06/23/linux-command-learning.html" title="Linux命令学习" target="_blank" rel="external">http://xingcici.github.io/2020/06/23/linux-command-learning.html</a>
+      <a href="http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html" title="RocketMQ 消息存储的设计与实现" target="_blank" rel="external">http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</a>
     </li>
     
     <li class="post-copyright-license">
@@ -411,13 +412,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/06/24/indepth-understanding-of-java-deserialization-vulnerability.html" title="深入理解 JAVA 反序列化漏洞"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/06/18/some-sentiments-in-programming.html" title="编程中的一些感悟"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/06/24/indepth-understanding-of-java-deserialization-vulnerability.html" title="深入理解 JAVA 反序列化漏洞"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
