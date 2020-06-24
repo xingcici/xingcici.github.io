@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://xingcici.github.io/20200617/questions-about-rocketmq-caused-by-no-route-info-for-this-topic.html</loc>
+    <loc>http://xingcici.github.io/2020/06/17/questions-about-rocketmq-caused-by-no-route-info-for-this-topic.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html</loc>
+    <loc>http://xingcici.github.io/2020/06/11/dubbo-call-to-solve-performance-problems-below-version-275.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200408/sentinel-production-environment-transformation-practice.html</loc>
+    <loc>http://xingcici.github.io/2020/04/08/sentinel-production-environment-transformation-practice.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200408/some-thoughts-on-ab-test-for-traffic.html</loc>
+    <loc>http://xingcici.github.io/2020/04/08/some-thoughts-on-ab-test-for-traffic.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200612/design-and-implementation-of-task-sharding-scheme-in-dispatch-center.html</loc>
+    <loc>http://xingcici.github.io/2020/06/12/design-and-implementation-of-task-sharding-scheme-in-dispatch-center.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200408/exploration-and-application-of-data-warehouse-for-small-mediumsized-companies.html</loc>
+    <loc>http://xingcici.github.io/2020/04/08/exploration-and-application-of-data-warehouse-for-small-mediumsized-companies.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200624/indepth-understanding-of-java-deserialization-vulnerability.html</loc>
+    <loc>http://xingcici.github.io/2020/06/24/indepth-understanding-of-java-deserialization-vulnerability.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200616/use-of-zookeeper-in-distributed-coordination.html</loc>
+    <loc>http://xingcici.github.io/2020/06/16/use-of-zookeeper-in-distributed-coordination.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200618/some-sentiments-in-programming.html</loc>
+    <loc>http://xingcici.github.io/2020/06/18/some-sentiments-in-programming.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200615/simple-implementation-of-raft-algorithm.html</loc>
+    <loc>http://xingcici.github.io/2020/06/15/simple-implementation-of-raft-algorithm.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200616/sofabolt-source-reading.html</loc>
+    <loc>http://xingcici.github.io/2020/06/16/sofabolt-source-reading.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200618/simple-use-of-sofabolt.html</loc>
+    <loc>http://xingcici.github.io/2020/06/18/simple-use-of-sofabolt.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>  <url>
-    <loc>http://xingcici.github.io/20200623/linux-command-learning.html</loc>
+    <loc>http://xingcici.github.io/2020/06/23/linux-command-learning.html</loc>
     <lastmod>2020-06-24</lastmod>
   </url>
 </urlset>
