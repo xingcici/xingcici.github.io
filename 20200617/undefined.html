@@ -17,19 +17,30 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Zookeepr在分布式协调中的使用 | 一方天地</title>
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Zookeepr在分布式协调中的使用">
-<meta property="og:url" content="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+  <title>由No route info for this topic引发的关于RocketMQ的问题 | 一方天地</title>
+  <meta name="description" content="背景昨天一位业务的同学在我审批MQ通过后，在业务代码里加了个 producer，结果启动项目时集成的调度中心的二方包里的 producer 在通过 MQ 注册 JOB 时报 No route info for this topic。 思路这个异常也算比较常见了，一般是没有创建 topic，或者连接错了 namesrv 导致。但是查看了他的代码后发现配置没有问题。然后他反馈他 DEBUG 出来 pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="由No route info for this topic引发的关于RocketMQ的问题">
+<meta property="og:url" content="http://xingcici.github.io/20200617/undefined.html">
 <meta property="og:site_name" content="一方天地">
+<meta property="og:description" content="背景昨天一位业务的同学在我审批MQ通过后，在业务代码里加了个 producer，结果启动项目时集成的调度中心的二方包里的 producer 在通过 MQ 注册 JOB 时报 No route info for this topic。 思路这个异常也算比较常见了，一般是没有创建 topic，或者连接错了 namesrv 导致。但是查看了他的代码后发现配置没有问题。然后他反馈他 DEBUG 出来 pr">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-16T03:00:46.686Z">
-<meta property="article:modified_time" content="2020-06-24T04:31:31.151Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617094655941.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617101631909.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617102300534.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617102825025.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103020755.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103404096.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103518874.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103630933.png">
+<meta property="article:published_time" content="2020-06-17T01:21:44.351Z">
+<meta property="article:modified_time" content="2020-06-24T04:31:31.153Z">
 <meta property="article:author" content="行词">
-<meta property="article:tag" content="Zookeeper">
+<meta property="article:tag" content="RocketMQ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617094655941.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/20200617/undefined.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -219,7 +230,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20JAVA%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" class="title">深入理解 JAVA 反序列化漏洞</a>
+                <a href="/20200624/undefined.html" class="title">深入理解 JAVA 反序列化漏洞</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-24T01:47:01.053Z" itemprop="datePublished">2020-06-24</time>
@@ -234,7 +245,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/23/Linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" class="title">Linux命令学习</a>
+                <a href="/20200623/undefined.html" class="title">Linux命令学习</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-23T06:16:36.652Z" itemprop="datePublished">2020-06-23</time>
@@ -249,7 +260,7 @@
                 <a class="category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/18/%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%82%9F/" class="title">编程中的一些感悟</a>
+                <a href="/20200618/undefined.html" class="title">编程中的一些感悟</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T12:20:02.180Z" itemprop="datePublished">2020-06-18</time>
@@ -264,7 +275,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/18/Sofa-bolt%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="title">Sofa-bolt的简单使用</a>
+                <a href="/20200618/undefined.html" class="title">Sofa-bolt的简单使用</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
@@ -279,7 +290,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/17/%E7%94%B1No%20route%20info%20for%20this%20topic%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8ERocketMQ%E7%9A%84%E9%97%AE%E9%A2%98/" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
+                <a href="/20200617/undefined.html" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-17T01:21:44.351Z" itemprop="datePublished">2020-06-17</time>
@@ -300,14 +311,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Zookeepr在分布式协调中的使用" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-由No route info for this topic引发的关于RocketMQ的问题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Zookeepr在分布式协调中的使用
+      由No route info for this topic引发的关于RocketMQ的问题
     </h1>
   
 
@@ -315,20 +326,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-	  <time datetime="2020-06-16T03:00:46.686Z" itemprop="datePublished">2020-06-16</time>
+	<a href="/20200617/undefined.html" class="article-date">
+	  <time datetime="2020-06-17T01:21:44.351Z" itemprop="datePublished">2020-06-17</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a>
+	<a class="article-tag-link" href="/tags/RocketMQ/" rel="tag">RocketMQ</a>
   </span>
 
 
@@ -341,20 +352,47 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/20200617/undefined.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 0(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 874(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>昨天一位业务的同学在我审批MQ通过后，在业务代码里加了个 producer，结果启动项目时集成的调度中心的二方包里的 producer 在通过 MQ 注册 JOB 时报 No route info for this topic。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这个异常也算比较常见了，一般是没有创建 topic，或者连接错了 namesrv 导致。但是查看了他的代码后发现配置<code>没有问题</code>。然后他反馈他 DEBUG 出来 producer 里的 namesrv 是正确的，然后他自己新加的。这就很奇怪了，于是我让他提交了代码然后申请了代码权限看下原因。</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>这里先说一句，我对 BUG 这种东西，一直都相信一句话，99%你碰到觉得无比高深的 BUG，基本都是非常简单的点弄错了导致的。这次果然还是如此。</p>
+<p>一开始我都没去看配置的问题，因为从业务方之前截图给我的配置里是没问题的。我们对配置的引用有两种方式，一种是 @key@，另外一种是 ${key}。截图给我的时候用的是 @key@，我想当然觉得这应该也是能正常拿到 value 的。</p>
+<p>于是开始DEBUG，发现他配置的 @key@ 居然没引用到 value，直接把 @key @作为 namesrv 传进去了,如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617094655941.png" alt="image-20200617094655941"></p>
+<p>但是思考一下，又有问题了。按正常的思维，namesrv配置难道不是应该跟着 producer 吗。难道 rocketMQ 在同一个 JVM 中只允许连一个 namesrv?如果是这样，那是配置的覆盖还是单例来实现呢?</p>
+<p>于是继续看源码。</p>
+<p>异常是在这行抛出</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617101631909.png" alt="image-20200617101631909"></p>
+<p>抛出的原因是下面这行判断不通过。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">topicPublishInfo !&#x3D; null &amp;&amp; topicPublishInfo.ok()</span><br></pre></td></tr></table></figure>
+
+<p>继续追踪下去，可以看到是这个 Map 中 topic 对应的 topic 路由信息不存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617102300534.png" alt="image-20200617102300534"></p>
+<p>那么这个Map又是什么时候写入信息的呢。其实是在下图这个地方。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617102825025.png" alt="image-20200617102825025"></p>
+<p>上面那个写入路由信息的方法又是在这个地方调用的。注意，这个方法是 MQClientInstance 里的，不知道大家看到 Instance 这个类名结尾有没有啥感觉。我是看到这个基本就往单例或者跟某个 key 绑定这方面去想。那么继续看 MQClientInstance 是怎么维护的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103020755.png" alt="image-20200617103020755"></p>
+<p>MQClientInstance 存储和生成的地方如下面两张图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103404096.png" alt="image-20200617103404096"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103518874.png" alt="image-20200617103518874"></p>
+<p>可以看到是在这个地方做了个绑定，那么继续往下看。生成了 MQClientInstance 并以下图里的代码的结果为 key 放入</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200617103630933.png" alt="image-20200617103630933"></p>
+<p>那真相就出现了，<code>同一个 JVM 中如果配置的时候不配 unitName，那么不管配多少个 producer 都只会有一个 MQClientInstance,相当于 config 也就生效一份</code> 😁。基本就看哪个 producer先初始化了。后面来的只能拿之前的那个 MQClientInstance 来获取路由信息。</p>
+<p>再回到之前最开始的问题，业务方后面配置的 producer 是用 xml 配置的 bean，而调度中心的 producer 他们使用时在重写了 afterPropertiesSet 方法里初始化。理论上肯定是 spring 自身维护的 bean 初始化在 afterPropertiesSet 之前。然而xml里配置的value恰好又是错误的，就导致了 No route info for this topic 出现了。将 namesrv 的引用改为正确的，问题解决。</p>
+<p>后续在 vdianmq 里可以以 warn log 的形式提醒下业务方这方面使用时需要注意一下。</p>
+
       
     </div>
     <div class="article-footer">
@@ -363,7 +401,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Zookeepr在分布式协调中的使用" target="_blank" rel="external">http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+      <a href="http://xingcici.github.io/20200617/undefined.html" title="由No route info for this topic引发的关于RocketMQ的问题" target="_blank" rel="external">http://xingcici.github.io/20200617/undefined.html</a>
     </li>
     
     <li class="post-copyright-license">
@@ -410,12 +448,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/06/17/%E7%94%B1No%20route%20info%20for%20this%20topic%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8ERocketMQ%E7%9A%84%E9%97%AE%E9%A2%98/" title="由No route info for this topic引发的关于RocketMQ的问题"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/20200618/undefined.html" title="Sofa-bolt的简单使用"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/06/16/Sofa-bolt%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" title="Sofa-bolt源码阅读"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/20200616/.html" title="Zookeeper 在分布式协调中的使用"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
