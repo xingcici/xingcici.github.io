@@ -17,16 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>归档: 2020 | 一方天地</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="一方天地">
-<meta property="og:url" content="http://xingcici.github.io/archives/2020/index.html">
+  <title>针对流量的AB test 的一点思考 | 一方天地</title>
+  <meta name="description" content="之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。 在阅读下述方案之前 我们需要明确几个定义 AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。  某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="针对流量的AB test 的一点思考">
+<meta property="og:url" content="http://xingcici.github.io/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="一方天地">
+<meta property="og:description" content="之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。 在阅读下述方案之前 我们需要明确几个定义 AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。  某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png">
+<meta property="article:published_time" content="2020-04-08T05:19:40.257Z">
+<meta property="article:modified_time" content="2020-06-24T04:31:31.154Z">
 <meta property="article:author" content="行词">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/archives/2020/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/index.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -296,164 +302,177 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">归档: 2020</h1>
-	      <p class="text-muted">共 10 篇文章</p>
-	    </header>
-	    <div class="article-body">
-	      
-  
-  
+  <div class="content">
+  <article id="post-针对流量的AB test 的一点思考" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 class="article-title" itemprop="name">
+      针对流量的AB test 的一点思考
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2020" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2020
-            </a>
-            <!-- <a href="/archives/2020" class="archive-year">2020</a> -->
-          </h3>
-        </div>
-        <div id="collapse2020" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2020">
-        <div class="panel-body">
-          <div class="collection">
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/" class="article-date">
+	  <time datetime="2020-04-08T05:19:40.257Z" itemprop="datePublished">2020-04-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
+  </span>
+
+        
+
+        
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/" class="leancloud_visitors"  data-flag-title="针对流量的AB test 的一点思考">0</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 951(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。</p>
+<h4 id="在阅读下述方案之前-我们需要明确几个定义"><a href="#在阅读下述方案之前-我们需要明确几个定义" class="headerlink" title="在阅读下述方案之前 我们需要明确几个定义"></a>在阅读下述方案之前 我们需要明确几个定义</h4><ul>
+<li><p>AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。</p>
+</li>
+<li><p>某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶 ，指的就是不同的分组。</p>
+</li>
+<li><p>流量进入后会被打上一个或者多个 AB TEST 版本标识及 AB TEST 桶标识。</p>
+</li>
+</ul>
+<h4 id="单纯针对该需求的方案"><a href="#单纯针对该需求的方案" class="headerlink" title="单纯针对该需求的方案"></a>单纯针对该需求的方案</h4><p>目标: 相同用户返回相同落地页 不同用户根据比例返回不同落地页 跟踪不同落地页转化效率 </p>
+<p>方案: 根据ABTEST版本 建立唯一标识, 请求跳转链接时根据用的IP或者CookieId进行HASH，根据HASH命中区间( AB TEST 桶)返回不同的落地页，返回结果时带上TEST版本标识，转化效率的跟踪在H5进行。同时留有后门方便指定用户分入不同的区间中。</p>
+<h4 id="更通用的方案-也只是简略描述-具体还要根据详细的需求来细化"><a href="#更通用的方案-也只是简略描述-具体还要根据详细的需求来细化" class="headerlink" title="更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)"></a>更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)</h4><p>目标: 根据不同用户特征返回不同结果，跟踪不同返回结果的转化效率。 </p>
+<ul>
+<li>思路A 流量完全分层 所有流量可以循环利用 一个请求可以用于多个 AB TEST</li>
+</ul>
+<p>方案:</p>
+<ol>
+<li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID</p>
+</li>
+<li><p>设置 AB TEST 方案，每个AB TEST方案都有唯一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪，每个 AB TEST 桶可以设置一定比例的流量。 </p>
+</li>
+<li><p>在网关设置过滤器，对进入的符合要求的流量特征进行HASH(同时也可以针对特定的用户标识强行进行分组,方便测试)，打上进行中的 AB TEST 方案的标识， 再根据该 AB TEST 方案打上 AB TEST 桶的标识。再对该流量进行下一次循环，查询是否还有 AB TEST 方案可以利用它，有的话则继续进行标记。符合最后的标记可能是类似于TESTA_GROUP1|TESTB_GROUP2。</p>
+</li>
+<li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。</p>
+</li>
+</ol>
+<p>存在的问题：当不同的 AB TEST 方案对相同页面做实验时就会出现问题。</p>
+<ul>
+<li>思路B 流量预先分桶 一个请求只能用于一个 AB TEST </li>
+</ul>
+<p>方案:</p>
+<ol>
+<li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID。</p>
+</li>
+<li><p>设置实验方案，每个 AB TEST 方案都有每一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪。 </p>
+</li>
+<li><p>在网关设置过滤器，对圈定范围流量先随机进行HASH，按实验需要的流量大小随机分到不同的流量桶中，再在流量桶中实施具体的 AB TEST 方案， 再根据该 AB TEST 方案打上 AB TEST 桶的标识 例如 TESTA_GROUP1，随后直接进入服务端。 </p>
+</li>
+<li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。 </p>
+</li>
+</ol>
+<p>存在的问题：当 AB TEST 方案逐渐增加时，后来增加的 AB TEST 方案可能无法获取到足够的流量 </p>
+<p>附图 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png" alt="image-20200623190239794"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xingcici.github.io/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/" title="针对流量的AB test 的一点思考" target="_blank" rel="external">http://xingcici.github.io/2020/04/08/%E9%92%88%E5%AF%B9%E6%B5%81%E9%87%8F%E7%9A%84AB%20test%20%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</a>
+    </li>
     
-<a href="/2020/06/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20JAVA%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-24T01:47:01.053Z" itemprop="datePublished">2020-06-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 深入理解 JAVA 反序列化漏洞
-</a>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
 
 
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xingcici" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xingcici" target="_blank"><span class="text-dark">行词</span><small class="ml-1x">中间件</small></a></h3>
+        <div>混迹互联网行业将近三年，业务和中间件都有涉猎，目前专注于中间件领域。欢迎探讨问题，联系邮箱 haifeng.pang@foxmail.com。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
-    
-    
-<a href="/2020/06/23/Linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-23T06:16:36.652Z" itemprop="datePublished">2020-06-23</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Linux命令学习
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/18/%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%82%9F/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-18T12:20:02.180Z" itemprop="datePublished">2020-06-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 编程中的一些感悟
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/18/Sofa-bolt%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Sofa-bolt的简单使用
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/17/%E7%94%B1No%20route%20info%20for%20this%20topic%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8ERocketMQ%E7%9A%84%E9%97%AE%E9%A2%98/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-17T01:21:44.351Z" itemprop="datePublished">2020-06-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 由No route info for this topic引发的关于RocketMQ的问题
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-16T03:00:46.686Z" itemprop="datePublished">2020-06-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Zookeepr在分布式协调中的使用
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/16/Sofa-bolt%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-16T02:57:12.287Z" itemprop="datePublished">2020-06-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Sofa-bolt源码阅读
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/15/Raft%E7%AE%97%E6%B3%95%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-15T12:02:55.454Z" itemprop="datePublished">2020-06-15</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Raft算法的简单实现
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-12T06:26:50.069Z" itemprop="datePublished">2020-06-12</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 调度中心任务分片方案设计和实现
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/06/11/dubbo%E8%B0%83%E7%94%A8%E5%9C%A82.7.5%E7%89%88%E6%9C%AC%E4%BB%A5%E4%B8%8B%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-11T02:26:30.501Z" itemprop="datePublished">2020-06-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> dubbo调用在2.7.5版本以下的性能问题的解决
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
+  <section id="comments">
   	
+      <div id="vcomments"></div>
     
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <ul class="pager pull-left">
-            
-            <li class="prev disabled">
-                <a href="javascript:;">
-                    <i class="icon icon-angle-left"></i>
-                    上一页
-                </a>
-            </li>
-            
-            
-            <li class="next">
-                <a href="/archives/2020/page/2/">
-                    下一页
-                    <i class="icon icon-angle-right"></i>
-                </a>
-            </li>
-            
-        </ul>
-        <div class="total-article bar-right">Page 1 of 2</div>
-        </div>
-    </nav>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
     
- 	
+    <li class="prev">
+      <a href="/2020/04/08/Sentinel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%94%B9%E9%80%A0%E5%AE%9E%E8%B7%B5/" title="Sentinel生产环境改造实践"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/08/%E4%B8%AD%E5%B0%8F%E5%9E%8B%E5%85%AC%E5%8F%B8%E6%95%B0%E4%BB%93%E6%91%B8%E7%B4%A2%E5%92%8C%E5%BA%94%E7%94%A8/" title="中小型公司数仓摸索和应用"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -510,6 +529,127 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+<!-- custom analytics part create by xiamo -->
+<script defer src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script defer>
+AV.init({
+  appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+  appKey: 'latjez4p0BqCqKM14wXbCg0b'
+});
+
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+		var visitors= $('.leancloud_visitors');
+		query.greaterThanOrEqualTo("time", 0);		
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {				
+					return;
+				}
+				var data = results;
+				visitors.each(function(){
+					var url = $(this).attr('id').trim();					
+					for (var i = 0; i < data.length; i++) {
+						var object = data[i];
+						var content = object.get('time');
+						var _url = object.get('url')
+						if(url == _url){
+							$(this).text(content);
+						}
+					}
+				})
+				
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else {
+		showTime(Counter);
+	}
+}); 
+</script>
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+    appKey: 'latjez4p0BqCqKM14wXbCg0b',
+    placeholder: '欢迎交流~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
