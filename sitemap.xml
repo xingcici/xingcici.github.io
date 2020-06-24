@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xingcici.github.io/2020/06/16/use-of-zookeepr-in-distributed-coordination.html</loc>
+    
+    <lastmod>2020-06-24T07:10:49.200Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xingcici.github.io/2020/06/17/questions-about-rocketmq-caused-by-no-route-info-for-this-topic.html</loc>
     
     <lastmod>2020-06-24T06:59:04.329Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://xingcici.github.io/2020/06/24/indepth-understanding-of-java-deserialization-vulnerability.html</loc>
     
     <lastmod>2020-06-24T06:59:04.258Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xingcici.github.io/2020/06/16/use-of-zookeeper-in-distributed-coordination.html</loc>
-    
-    <lastmod>2020-06-24T06:59:04.255Z</lastmod>
     
   </url>
   
