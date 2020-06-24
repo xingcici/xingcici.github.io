@@ -17,16 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>标签: 网络 | 一方天地</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="一方天地">
-<meta property="og:url" content="http://xingcici.github.io/tags/%E7%BD%91%E7%BB%9C/index.html">
+  <title>调度中心任务分片方案设计和实现 | 一方天地</title>
+  <meta name="description" content="背景微店任务调度中心（TOC）每天承担千万甚至亿量级的任务调度，不单单是循环的传统任务调度，还承担了类似于延时消息的一次性调度。但是目前设计上仍然比较原始，是TOC抢分布式锁后通过线程不断扫表读取需要调度的job，再通过 dubbo 调度job，形成了一人工作，他人围观的场景。虽然能满足目前的需求，但是已经越来越力不从心，在一些极端的情况下，比如某个应用注册任务激增的情况下，就会出现大量的调度延迟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调度中心任务分片方案设计和实现">
+<meta property="og:url" content="http://xingcici.github.io/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="一方天地">
+<meta property="og:description" content="背景微店任务调度中心（TOC）每天承担千万甚至亿量级的任务调度，不单单是循环的传统任务调度，还承担了类似于延时消息的一次性调度。但是目前设计上仍然比较原始，是TOC抢分布式锁后通过线程不断扫表读取需要调度的job，再通过 dubbo 调度job，形成了一人工作，他人围观的场景。虽然能满足目前的需求，但是已经越来越力不从心，在一些极端的情况下，比如某个应用注册任务激增的情况下，就会出现大量的调度延迟">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200612143209085.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200612143227022.png">
+<meta property="article:published_time" content="2020-06-12T06:26:50.069Z">
+<meta property="article:modified_time" content="2020-06-24T04:31:31.155Z">
 <meta property="article:author" content="行词">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200612143209085.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/tags/%E7%BD%91%E7%BB%9C/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/index.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -294,92 +301,162 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-tags post-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">标签: 网络</h1>
-      <p class="text-muted hidden-xs">共 2 篇文章</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/tags">All</a></li>
-          
-          <li><a href="/tags/linux/">linux</a></li>
-          
-          <li><a href="/tags/算法/">算法</a></li>
-          
-          <li><a href="/tags/网络/">网络</a></li>
-          
-          <li><a href="/tags/Netty/">Netty</a></li>
-          
-          <li><a href="/tags/Zookeeper/">Zookeeper</a></li>
-          
-          <li><a href="/tags/dubbo/">dubbo</a></li>
-          
-          <li><a href="/tags/RocketMQ/">RocketMQ</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="row">
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-调度中心任务分片方案设计和实现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
         
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/06/18/Sofa-bolt%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Sofa-bolt的简单使用</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" class="label label-default mb">网络</a>
-     
-      <a href="/tags/Netty/" class="label label-default mb">Netty</a>
-     
-     
-   </div>
-   
-</article>
+  
+    <h1 class="article-title" itemprop="name">
+      调度中心任务分片方案设计和实现
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" class="article-date">
+	  <time datetime="2020-06-12T06:26:50.069Z" itemprop="datePublished">2020-06-12</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
+  </span>
+
+        
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
 
-</div>
-
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-06-16T02:57:12.287Z" itemprop="datePublished">2020-06-16</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/06/16/Sofa-bolt%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">Sofa-bolt源码阅读</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" class="label label-default mb">网络</a>
-     
-      <a href="/tags/Netty/" class="label label-default mb">Netty</a>
-     
-     
-   </div>
-   
-</article>
-
-
-</div>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 829(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+	
 
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>微店任务调度中心（TOC）每天承担千万甚至亿量级的任务调度，不单单是循环的传统任务调度，还承担了类似于延时消息的一次性调度。但是目前设计上仍然比较原始，是TOC抢分布式锁后通过线程不断扫表读取需要调度的job，再通过 dubbo 调度job，形成了一人工作，他人围观的场景。虽然能满足目前的需求，但是已经越来越力不从心，在一些极端的情况下，比如某个应用注册任务激增的情况下，就会出现大量的调度延迟。于是以能无限水平扩容为目标的调度方案的改造势在必行。</p>
+<h3 id="老架构设计"><a href="#老架构设计" class="headerlink" title="老架构设计"></a>老架构设计</h3><p>服务通过抢占zk分布式锁来获得执行权限，从数据库中扫表获得需要执行的任务。因为我们有256张分表，我们也限制成从每张分表里读取100条记录，每次最大总数也就是25600。</p>
+<p>执行时通过 dubbo rpc 回调注册方来执行任务。</p>
+<p>注册方执行完后会回调调度中心更新任务状态。</p>
+<h3 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h3><p>调研时发现，目前开源的比较流行的调度中心主要有两种方案。一种是中心化的，例如xxl-job。另外一种是去中心化的，例如 elastic-job。</p>
+<p>由于公司内部zookeeper的使用已经比较成熟了，而且对高可用的要求比较高。于是着重研究了es-job。</p>
+<p>es-job实现分片的核心在于利用zk作为协调者来进行分片。</p>
+<p>关键流程如下：</p>
+<p>1、每一个服务启动时，向zk的worker节点注册，同时参与leader的选举。</p>
+<p>2、leader选举成功后，在需要进行分片的任务执行时，获取worker节点的数量，对任务进行切分，分配至worker节点下。</p>
+<p>3、worker节点执行任务时从cache读取需要执行的任务进行执行，同时更新任务执行的状态。</p>
+<p>关键的流程是比较简单的，主要就是利用了zk。</p>
+<h3 id="新架构设计"><a href="#新架构设计" class="headerlink" title="新架构设计"></a>新架构设计</h3><p>我们公司的调度产品有个特点，底层数据库就是分表的，固定的256张表，那么存在天然的分片优势。</p>
+<p>于是，我们在设计时也就比较简单，将256张表分给注册在zk worker节点下的worker就行。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>1、调度中心起来后，向zk 注册 worker临时节点，同时监听链接状态和节点 node cache 的变化。</p>
+<p>2、每个实例都参与 leader 选举。成为leader 的实例 对 worker 根节点添加监听器，监听 worker 变化事件。</p>
+<p>3、leader 根据 worker 数量，对 256 张表进行分配，分配结果写入到 node cache。</p>
+<p>4、worker 监听到 node cache 发生变化，获取最新数据， 写入本地的缓存。</p>
+<p>5、当 worker 与 zk 之间连接发生波动时，清空本地缓存。</p>
+<p>6、调度扫描线程根据本地缓存里的表，进行扫表执行。</p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>老架构CPU监控</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200612143209085.png" alt="image-20200612143209085"></p>
+<p>新架构CPU监控</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200612143227022.png" alt="image-20200612143227022"></p>
+<p>可以看到，一人干活，他人围观的场面一去不复返了。大家一起干活，很和谐。</p>
+<h3 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h3><h3 id="etc"><a href="#etc" class="headerlink" title="etc"></a>etc</h3>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xingcici.github.io/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/" title="调度中心任务分片方案设计和实现" target="_blank" rel="external">http://xingcici.github.io/2020/06/12/%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83%E4%BB%BB%E5%8A%A1%E5%88%86%E7%89%87%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xingcici" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xingcici" target="_blank"><span class="text-dark">行词</span><small class="ml-1x">中间件</small></a></h3>
+        <div>混迹互联网行业将近三年，业务和中间件都有涉猎，目前专注于中间件领域。欢迎探讨问题，联系邮箱 haifeng.pang@foxmail.com。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/06/15/Raft%E7%AE%97%E6%B3%95%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/" title="Raft算法的简单实现"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/06/11/dubbo%E8%B0%83%E7%94%A8%E5%9C%A82.7.5%E7%89%88%E6%9C%AC%E4%BB%A5%E4%B8%8B%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" title="dubbo调用在2.7.5版本以下的性能问题的解决"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -436,6 +513,39 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+    appKey: 'latjez4p0BqCqKM14wXbCg0b',
+    placeholder: '欢迎交流~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
