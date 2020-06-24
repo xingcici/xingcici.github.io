@@ -17,28 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>dubbo调用在2.7.5版本以下的性能问题的解决 | 一方天地</title>
-  <meta name="description" content="背景toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。 如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。 数据理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在  这个方法">
-<meta property="og:type" content="article">
-<meta property="og:title" content="dubbo调用在2.7.5版本以下的性能问题的解决">
-<meta property="og:url" content="http://xingcici.github.io/2020/06/11/undefined/index.html">
+  <title>Zookeeper 在分布式协调中的使用 | 一方天地</title>
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Zookeeper 在分布式协调中的使用">
+<meta property="og:url" content="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="背景toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。 如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。 数据理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在  这个方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/9C1437EC-09DE-4039-9800-C68D1591701D.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/A0BCC225-A330-45BB-AC2F-4C73EB38AABB.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/1FFB477A-6B66-4741-8918-854868F7642B.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/8015F365-6DDC-4F48-BAB3-60BAF289208A.png">
-<meta property="article:published_time" content="2020-06-11T02:26:30.501Z">
-<meta property="article:modified_time" content="2020-06-24T04:31:31.148Z">
+<meta property="article:published_time" content="2020-06-16T03:00:46.686Z">
+<meta property="article:modified_time" content="2020-06-24T06:39:50.660Z">
 <meta property="article:author" content="行词">
-<meta property="article:tag" content="dubbo">
+<meta property="article:tag" content="Zookeeper">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/2020/06/11/undefined/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -228,7 +219,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/24/undefined/" class="title">深入理解 JAVA 反序列化漏洞</a>
+                <a href="/2020/06/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20JAVA%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" class="title">深入理解 JAVA 反序列化漏洞</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-24T01:47:01.053Z" itemprop="datePublished">2020-06-24</time>
@@ -243,7 +234,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/23/undefined/" class="title">Linux命令学习</a>
+                <a href="/2020/06/23/Linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" class="title">Linux命令学习</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-23T06:16:36.652Z" itemprop="datePublished">2020-06-23</time>
@@ -258,7 +249,7 @@
                 <a class="category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/18/undefined/" class="title">编程中的一些感悟</a>
+                <a href="/2020/06/18/%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%82%9F/" class="title">编程中的一些感悟</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T12:20:02.180Z" itemprop="datePublished">2020-06-18</time>
@@ -273,7 +264,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/18/undefined/" class="title">Sofa-bolt的简单使用</a>
+                <a href="/2020/06/18/Sofa-bolt%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="title">Sofa-bolt的简单使用</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
@@ -288,7 +279,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/06/17/undefined/" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
+                <a href="/2020/06/17/%E7%94%B1No%20route%20info%20for%20this%20topic%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8ERocketMQ%E7%9A%84%E9%97%AE%E9%A2%98/" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-17T01:21:44.351Z" itemprop="datePublished">2020-06-17</time>
@@ -309,14 +300,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-dubbo调用在2.7.5版本以下的性能问题的解决" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Zookeepr在分布式协调中的使用" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      dubbo调用在2.7.5版本以下的性能问题的解决
+      Zookeeper 在分布式协调中的使用
     </h1>
   
 
@@ -324,20 +315,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/06/11/undefined/" class="article-date">
-	  <time datetime="2020-06-11T02:26:30.501Z" itemprop="datePublished">2020-06-11</time>
+	<a href="/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2020-06-16T03:00:46.686Z" itemprop="datePublished">2020-06-16</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/">日常问题</a>
+    <a class="article-category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/dubbo/" rel="tag">dubbo</a>
+	<a class="article-tag-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a>
   </span>
 
 
@@ -350,10 +341,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/11/undefined/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 451(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 0(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -363,24 +354,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。</p>
-<p>如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。</p>
-<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png" alt="652BE8F3-6A34-467F-BCE0-5362B40E1E93"></p>
-<p>这个方法上。</p>
-<p>用 arthas 抓的图如图所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/9C1437EC-09DE-4039-9800-C68D1591701D.png" alt="9C1437EC-09DE-4039-9800-C68D1591701D"></p>
-<p>可以看到 config.get 这个方法远大于或者接近实际调用过程。理论上对这个点进行优化可以至少提升一倍的性能。</p>
-<h3 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h3><p>继续分析 get 方法，其内部耗时主要还是在 checkAndUpdateSubConfigs(); 这个方法。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/A0BCC225-A330-45BB-AC2F-4C73EB38AABB.png" alt="A0BCC225-A330-45BB-AC2F-4C73EB38AABB"></p>
-<p>这个方法主要是获取刷新各种配置。而且由于我们没有用新版的dubbo配置中心，导致每调一次GET会打一次warn日志<img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B.png" alt="42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B"></p>
-<p>于是考虑要不在get 做个缓存来解决。但是在解决之前也查一下有没有其他人碰到这个问题，结果还真有。他们解决的办法是升级dubbo 版本。apache 2.7.5 版本</p>
-<p>就解决了这个性能问题，将 checkAndUpdateSubConfigs 丢到 init 方法里，只在 init 的时候调用一次。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/1FFB477A-6B66-4741-8918-854868F7642B.png" alt="1FFB477A-6B66-4741-8918-854868F7642B"></p>
-<p>不过由于升级 dubbo 核心版本没那么容易，于是暂时就在 get 外层做了个缓存来解决。</p>
-<p>下图是修改后的耗时，可以看到耗时基本只剩调用这块。具体的性能提升多少等待后续的测试。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/8015F365-6DDC-4F48-BAB3-60BAF289208A.png" alt="8015F365-6DDC-4F48-BAB3-60BAF289208A"></p>
-
+        
       
     </div>
     <div class="article-footer">
@@ -389,7 +363,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://xingcici.github.io/2020/06/11/undefined/" title="dubbo调用在2.7.5版本以下的性能问题的解决" target="_blank" rel="external">http://xingcici.github.io/2020/06/11/undefined/</a>
+      <a href="http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Zookeeper 在分布式协调中的使用" target="_blank" rel="external">http://xingcici.github.io/2020/06/16/Zookeepr%E5%9C%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -436,12 +410,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/06/12/undefined/" title="调度中心任务分片方案设计和实现"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2020/06/17/%E7%94%B1No%20route%20info%20for%20this%20topic%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8ERocketMQ%E7%9A%84%E9%97%AE%E9%A2%98/" title="由No route info for this topic引发的关于RocketMQ的问题"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/04/08/undefined/" title="Sentinel生产环境改造实践"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/06/16/Sofa-bolt%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" title="Sofa-bolt源码阅读"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
