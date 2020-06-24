@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xingcici.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-06-24T07:43:54.601Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xingcici.github.io/404.html</loc>
+    
+    <lastmod>2020-06-24T07:43:47.620Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xingcici.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-06-24T07:37:13.614Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xingcici.github.io/2020/06/16/use-of-zookeepr-in-distributed-coordination.html</loc>
     
     <lastmod>2020-06-24T07:11:58.541Z</lastmod>
@@ -89,27 +110,6 @@
     <loc>http://xingcici.github.io/2020/06/23/linux-command-learning.html</loc>
     
     <lastmod>2020-06-24T06:59:04.203Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xingcici.github.io/tags/index.html</loc>
-    
-    <lastmod>2020-06-24T06:08:06.587Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xingcici.github.io/categories/index.html</loc>
-    
-    <lastmod>2020-06-24T06:08:06.586Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xingcici.github.io/404.html</loc>
-    
-    <lastmod>2020-06-24T06:08:06.585Z</lastmod>
     
   </url>
   
