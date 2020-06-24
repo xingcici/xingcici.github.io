@@ -17,21 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Raft算法的简单实现 | 一方天地</title>
-  <meta name="description" content="敬请期待">
+  <title>针对流量的AB test 的一点思考 | 一方天地</title>
+  <meta name="description" content="之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。 在阅读下述方案之前 我们需要明确几个定义 AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。  某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raft算法的简单实现">
-<meta property="og:url" content="http://xingcici.github.io/2020/0615/undefined-translate-title/index.html">
+<meta property="og:title" content="针对流量的AB test 的一点思考">
+<meta property="og:url" content="http://xingcici.github.io/20200408/some-thoughts-on-ab-test-for-traffic.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="敬请期待">
+<meta property="og:description" content="之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。 在阅读下述方案之前 我们需要明确几个定义 AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。  某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-15T12:02:55.454Z">
-<meta property="article:modified_time" content="2020-06-24T06:59:04.235Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png">
+<meta property="article:published_time" content="2020-04-08T05:19:40.257Z">
+<meta property="article:modified_time" content="2020-06-24T06:59:04.263Z">
 <meta property="article:author" content="行词">
-<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/2020/0615/undefined-translate-title/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/20200408/some-thoughts-on-ab-test-for-traffic.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -221,7 +222,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/0624/undefined-translate-title/" class="title">深入理解 JAVA 反序列化漏洞</a>
+                <a href="/20200624/indepth-understanding-of-java-deserialization-vulnerability.html" class="title">深入理解 JAVA 反序列化漏洞</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-24T01:47:01.053Z" itemprop="datePublished">2020-06-24</time>
@@ -236,7 +237,7 @@
                 <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">杂七杂八</a>
               </p>
               <p class="item-title">
-                <a href="/2020/0623/undefined-translate-title/" class="title">Linux命令学习</a>
+                <a href="/20200623/linux-command-learning.html" class="title">Linux命令学习</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-23T06:16:36.652Z" itemprop="datePublished">2020-06-23</time>
@@ -251,7 +252,7 @@
                 <a class="category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
               </p>
               <p class="item-title">
-                <a href="/2020/0618/undefined-translate-title/" class="title">编程中的一些感悟</a>
+                <a href="/20200618/some-sentiments-in-programming.html" class="title">编程中的一些感悟</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T12:20:02.180Z" itemprop="datePublished">2020-06-18</time>
@@ -266,7 +267,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/0618/undefined-translate-title/" class="title">Sofa-bolt的简单使用</a>
+                <a href="/20200618/simple-use-of-sofabolt.html" class="title">Sofa-bolt的简单使用</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
@@ -281,7 +282,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
               </p>
               <p class="item-title">
-                <a href="/2020/0617/undefined-translate-title/" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
+                <a href="/20200617/questions-about-rocketmq-caused-by-no-route-info-for-this-topic.html" class="title">由No route info for this topic引发的关于RocketMQ的问题</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-06-17T01:21:44.351Z" itemprop="datePublished">2020-06-17</time>
@@ -302,14 +303,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Raft算法的简单实现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-针对流量的AB test 的一点思考" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Raft算法的简单实现
+      针对流量的AB test 的一点思考
     </h1>
   
 
@@ -317,22 +318,17 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/0615/undefined-translate-title/" class="article-date">
-	  <time datetime="2020-06-15T12:02:55.454Z" itemprop="datePublished">2020-06-15</time>
+	<a href="/20200408/some-thoughts-on-ab-test-for-traffic.html" class="article-date">
+	  <time datetime="2020-04-08T05:19:40.257Z" itemprop="datePublished">2020-04-08</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
   </span>
 
         
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
-  </span>
-
 
         
 	<span class="article-read hidden-xs">
@@ -343,20 +339,63 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/0615/undefined-translate-title/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/20200408/some-thoughts-on-ab-test-for-traffic.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 951(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>敬请期待</p>
+        <p>之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。</p>
+<h4 id="在阅读下述方案之前-我们需要明确几个定义"><a href="#在阅读下述方案之前-我们需要明确几个定义" class="headerlink" title="在阅读下述方案之前 我们需要明确几个定义"></a>在阅读下述方案之前 我们需要明确几个定义</h4><ul>
+<li><p>AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。</p>
+</li>
+<li><p>某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶 ，指的就是不同的分组。</p>
+</li>
+<li><p>流量进入后会被打上一个或者多个 AB TEST 版本标识及 AB TEST 桶标识。</p>
+</li>
+</ul>
+<h4 id="单纯针对该需求的方案"><a href="#单纯针对该需求的方案" class="headerlink" title="单纯针对该需求的方案"></a>单纯针对该需求的方案</h4><p>目标: 相同用户返回相同落地页 不同用户根据比例返回不同落地页 跟踪不同落地页转化效率 </p>
+<p>方案: 根据ABTEST版本 建立唯一标识, 请求跳转链接时根据用的IP或者CookieId进行HASH，根据HASH命中区间( AB TEST 桶)返回不同的落地页，返回结果时带上TEST版本标识，转化效率的跟踪在H5进行。同时留有后门方便指定用户分入不同的区间中。</p>
+<h4 id="更通用的方案-也只是简略描述-具体还要根据详细的需求来细化"><a href="#更通用的方案-也只是简略描述-具体还要根据详细的需求来细化" class="headerlink" title="更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)"></a>更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)</h4><p>目标: 根据不同用户特征返回不同结果，跟踪不同返回结果的转化效率。 </p>
+<ul>
+<li>思路A 流量完全分层 所有流量可以循环利用 一个请求可以用于多个 AB TEST</li>
+</ul>
+<p>方案:</p>
+<ol>
+<li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID</p>
+</li>
+<li><p>设置 AB TEST 方案，每个AB TEST方案都有唯一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪，每个 AB TEST 桶可以设置一定比例的流量。 </p>
+</li>
+<li><p>在网关设置过滤器，对进入的符合要求的流量特征进行HASH(同时也可以针对特定的用户标识强行进行分组,方便测试)，打上进行中的 AB TEST 方案的标识， 再根据该 AB TEST 方案打上 AB TEST 桶的标识。再对该流量进行下一次循环，查询是否还有 AB TEST 方案可以利用它，有的话则继续进行标记。符合最后的标记可能是类似于TESTA_GROUP1|TESTB_GROUP2。</p>
+</li>
+<li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。</p>
+</li>
+</ol>
+<p>存在的问题：当不同的 AB TEST 方案对相同页面做实验时就会出现问题。</p>
+<ul>
+<li>思路B 流量预先分桶 一个请求只能用于一个 AB TEST </li>
+</ul>
+<p>方案:</p>
+<ol>
+<li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID。</p>
+</li>
+<li><p>设置实验方案，每个 AB TEST 方案都有每一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪。 </p>
+</li>
+<li><p>在网关设置过滤器，对圈定范围流量先随机进行HASH，按实验需要的流量大小随机分到不同的流量桶中，再在流量桶中实施具体的 AB TEST 方案， 再根据该 AB TEST 方案打上 AB TEST 桶的标识 例如 TESTA_GROUP1，随后直接进入服务端。 </p>
+</li>
+<li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。 </p>
+</li>
+</ol>
+<p>存在的问题：当 AB TEST 方案逐渐增加时，后来增加的 AB TEST 方案可能无法获取到足够的流量 </p>
+<p>附图 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png" alt="image-20200623190239794"></p>
 
       
     </div>
@@ -366,7 +405,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://xingcici.github.io/2020/0615/undefined-translate-title/" title="Raft算法的简单实现" target="_blank" rel="external">http://xingcici.github.io/2020/0615/undefined-translate-title/</a>
+      <a href="http://xingcici.github.io/20200408/some-thoughts-on-ab-test-for-traffic.html" title="针对流量的AB test 的一点思考" target="_blank" rel="external">http://xingcici.github.io/20200408/some-thoughts-on-ab-test-for-traffic.html</a>
     </li>
     
     <li class="post-copyright-license">
@@ -413,12 +452,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/0616/undefined-translate-title/" title="Sofa-bolt源码阅读"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/20200408/sentinel-production-environment-transformation-practice.html" title="Sentinel生产环境改造实践"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/0612/undefined-translate-title/" title="调度中心任务分片方案设计和实现"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/20200408/exploration-and-application-of-data-warehouse-for-small-mediumsized-companies.html" title="中小型公司数仓摸索和应用"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

@@ -17,16 +17,28 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>分类: 源码 | 一方天地</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="一方天地">
-<meta property="og:url" content="http://xingcici.github.io/categories/%E6%BA%90%E7%A0%81/index.html">
+  <title>dubbo调用在2.7.5版本以下的性能问题的解决 | 一方天地</title>
+  <meta name="description" content="背景toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。 如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。 数据理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在  这个方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dubbo调用在2.7.5版本以下的性能问题的解决">
+<meta property="og:url" content="http://xingcici.github.io/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html">
 <meta property="og:site_name" content="一方天地">
+<meta property="og:description" content="背景toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。 如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。 数据理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在  这个方法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/9C1437EC-09DE-4039-9800-C68D1591701D.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/A0BCC225-A330-45BB-AC2F-4C73EB38AABB.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/1FFB477A-6B66-4741-8918-854868F7642B.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/8015F365-6DDC-4F48-BAB3-60BAF289208A.png">
+<meta property="article:published_time" content="2020-06-11T02:26:30.501Z">
+<meta property="article:modified_time" content="2020-06-24T06:59:04.285Z">
 <meta property="article:author" content="行词">
+<meta property="article:tag" content="dubbo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/categories/%E6%BA%90%E7%A0%81/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -294,63 +306,159 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">分类: 源码</h1>
-      <p class="hidden-xs">共 1 篇文章</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/分布式/">分布式</a></li>
-          
-          <li><a href="/categories/杂七杂八/">杂七杂八</a></li>
-          
-          <li><a href="/categories/中间件/">中间件</a></li>
-          
-          <li><a href="/categories/源码/">源码</a></li>
-          
-          <li><a href="/categories/数据智能/">数据智能</a></li>
-          
-          <li><a href="/categories/日常问题/">日常问题</a></li>
-          
-          <li><a href="/categories/架构设计/">架构设计</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse源码" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              源码
-            </a>
-            <small class="text-muted">(Total 1 articles)</small>
-        </h4>
-    </div>
-    <div id="collapse源码" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading源码">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/20200616/sofabolt-source-reading.html" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-16T02:57:12.287Z" itemprop="datePublished">2020-06-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Sofa-bolt源码阅读
-</a>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-dubbo调用在2.7.5版本以下的性能问题的解决" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      dubbo调用在2.7.5版本以下的性能问题的解决
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html" class="article-date">
+	  <time datetime="2020-06-11T02:26:30.501Z" itemprop="datePublished">2020-06-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/">日常问题</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/dubbo/" rel="tag">dubbo</a>
+  </span>
 
 
-              
-            </div>
-        </div>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 451(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+      </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。</p>
+<p>如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。</p>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png" alt="652BE8F3-6A34-467F-BCE0-5362B40E1E93"></p>
+<p>这个方法上。</p>
+<p>用 arthas 抓的图如图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/9C1437EC-09DE-4039-9800-C68D1591701D.png" alt="9C1437EC-09DE-4039-9800-C68D1591701D"></p>
+<p>可以看到 config.get 这个方法远大于或者接近实际调用过程。理论上对这个点进行优化可以至少提升一倍的性能。</p>
+<h3 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h3><p>继续分析 get 方法，其内部耗时主要还是在 checkAndUpdateSubConfigs(); 这个方法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/A0BCC225-A330-45BB-AC2F-4C73EB38AABB.png" alt="A0BCC225-A330-45BB-AC2F-4C73EB38AABB"></p>
+<p>这个方法主要是获取刷新各种配置。而且由于我们没有用新版的dubbo配置中心，导致每调一次GET会打一次warn日志<img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B.png" alt="42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B"></p>
+<p>于是考虑要不在get 做个缓存来解决。但是在解决之前也查一下有没有其他人碰到这个问题，结果还真有。他们解决的办法是升级dubbo 版本。apache 2.7.5 版本</p>
+<p>就解决了这个性能问题，将 checkAndUpdateSubConfigs 丢到 init 方法里，只在 init 的时候调用一次。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/1FFB477A-6B66-4741-8918-854868F7642B.png" alt="1FFB477A-6B66-4741-8918-854868F7642B"></p>
+<p>不过由于升级 dubbo 核心版本没那么容易，于是暂时就在 get 外层做了个缓存来解决。</p>
+<p>下图是修改后的耗时，可以看到耗时基本只剩调用这块。具体的性能提升多少等待后续的测试。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/8015F365-6DDC-4F48-BAB3-60BAF289208A.png" alt="8015F365-6DDC-4F48-BAB3-60BAF289208A"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xingcici.github.io/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html" title="dubbo调用在2.7.5版本以下的性能问题的解决" target="_blank" rel="external">http://xingcici.github.io/20200611/dubbo-call-to-solve-performance-problems-below-version-275.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xingcici" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xingcici" target="_blank"><span class="text-dark">行词</span><small class="ml-1x">中间件</small></a></h3>
+        <div>混迹互联网行业将近三年，业务和中间件都有涉猎，目前专注于中间件领域。欢迎探讨问题，联系邮箱 haifeng.pang@foxmail.com。</div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/20200612/design-and-implementation-of-task-sharding-scheme-in-dispatch-center.html" title="调度中心任务分片方案设计和实现"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/20200408/sentinel-production-environment-transformation-practice.html" title="Sentinel生产环境改造实践"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -407,6 +515,39 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+    appKey: 'latjez4p0BqCqKM14wXbCg0b',
+    placeholder: '欢迎交流~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
