@@ -18,15 +18,15 @@
   
   
   <title>反射获取一个类的私有方法 | 一方天地</title>
-  <meta name="description" content="记录生活学习">
+  <meta name="description" content="123456789101112131415161718192021222324public class AccessPrivateMember &amp;#123;    public static void main(String[] args) &amp;#123;        try &amp;#123;            Class c &#x3D; Class.forName(&quot;com.example.reflec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反射获取一个类的私有方法">
 <meta property="og:url" content="http://xingcici.github.io/2020/06/24/reflection-to-get-a-class-private-method.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="记录生活学习">
+<meta property="og:description" content="123456789101112131415161718192021222324public class AccessPrivateMember &amp;#123;    public static void main(String[] args) &amp;#123;        try &amp;#123;            Class c &#x3D; Class.forName(&quot;com.example.reflec">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-24T09:29:25.561Z">
-<meta property="article:modified_time" content="2020-06-24T09:30:21.881Z">
+<meta property="article:modified_time" content="2020-06-28T02:49:04.490Z">
 <meta property="article:author" content="行词">
 <meta property="article:tag" content="反射">
 <meta name="twitter:card" content="summary">
@@ -346,7 +346,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/24/reflection-to-get-a-class-private-method.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 0(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 105(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -356,7 +356,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccessPrivateMember</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class c = Class.forName(<span class="string">"com.example.reflect.HelloService"</span>);</span><br><span class="line">            <span class="comment">//能获取所有有访问权限的方法，包括父类中继承的</span></span><br><span class="line">            Method publicMethod = c.getMethod(<span class="string">"publicHello"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">            Method saySomething = c.getMethod(<span class="string">"publicHello"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="comment">//获取所有方法 本方法中</span></span><br><span class="line">            Method thisClassMethod = c.getDeclaredMethod(<span class="string">"privateHello"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="comment">//设置权限</span></span><br><span class="line">            thisClassMethod.setAccessible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            publicMethod.invoke(c.newInstance(), <span class="string">"publicMethod"</span>);</span><br><span class="line">            saySomething.invoke(c.newInstance(), <span class="string">"saySomething"</span>);</span><br><span class="line"></span><br><span class="line">            thisClassMethod.invoke(c.newInstance(), <span class="string">"thisClassMethod"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
