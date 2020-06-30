@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2020-06-30T03:33:21.715Z</updated>
+  <updated>2020-06-30T10:20:18.731Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RockeMQ 单机版在 centos 上的部署</title>
+    <link href="http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html"/>
+    <id>http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html</id>
+    <published>2020-06-30T10:14:15.737Z</published>
+    <updated>2020-06-30T10:20:18.731Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。</p><ol><li><p>到镜像站下载安装包 wget <a href="http://mirror.bit.edu.cn/apache/rocketmq/4.7.1/rocketmq-all-4.7.1-bin-release.zip" target="_blank" rel="noopener">http://mirror.bit.edu.cn/apache/rocketmq/4.7.1/rocketmq-all-4.7.1-bin-release.zip</a> 并解压缩</p></li><li><p>修改 broker.conf 文件（conf/broker.conf）添加 naemServer 地址的属性以及自动创建 Topic 的属性。</p><blockquote><p>namesrvAddr = 127.0.0.1:9876</p><p>autoCreateTopicEnable = true</p></blockquote></li><li><p>修改启动参数（由于 rocketMQ 对内存的消耗比较大，所以测试时修改为本机合适的大小）。主要修改 bin 目录下的 runserver.sh 和 runbroker.sh 下的 JAVA_OPT 属性。</p></li><li><p>nohup sh bin/mqnamesrv &amp;</p><p>nohup sh bin/mqbroker -c /root/download/rocketmq/conf/broker.conf &amp;</p><p>sh bin/mqshutdown namesrv</p><p>sh bin/mqshutdown broker</p></li><li><p>注意开放端口</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;到镜像站下载安装包 wget &lt;a href=&quot;http://mirror.bit.edu.cn/apache/rocketmq/
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+      <category term="RocketMQ" scheme="http://xingcici.github.io/tags/RocketMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>反射获取一个类的私有方法</title>

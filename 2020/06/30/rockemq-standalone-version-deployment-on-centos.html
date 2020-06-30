@@ -17,18 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>分类: 编程 | 一方天地</title>
-  <meta name="description" content="记录生活学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一方天地">
-<meta property="og:url" content="http://xingcici.github.io/categories/%E7%BC%96%E7%A8%8B/index.html">
+  <title>RockeMQ 单机版在 centos 上的部署 | 一方天地</title>
+  <meta name="description" content="最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。  到镜像站下载安装包 wget http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;rocketmq&#x2F;4.7.1&#x2F;rocketmq-all-4.7.1-bin-release.zip 并解压缩  修改 broker.conf 文件（conf&#x2F;broker.conf）添加 na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RockeMQ 单机版在 centos 上的部署">
+<meta property="og:url" content="http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="记录生活学习">
+<meta property="og:description" content="最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。  到镜像站下载安装包 wget http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;rocketmq&#x2F;4.7.1&#x2F;rocketmq-all-4.7.1-bin-release.zip 并解压缩  修改 broker.conf 文件（conf&#x2F;broker.conf）添加 na">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-30T10:14:15.737Z">
+<meta property="article:modified_time" content="2020-06-30T10:20:18.731Z">
 <meta property="article:author" content="行词">
+<meta property="article:tag" content="RocketMQ">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/categories/%E7%BC%96%E7%A8%8B/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -296,65 +299,158 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">分类: 编程</h1>
-      <p class="hidden-xs">共 1 篇文章</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/分布式/">分布式</a></li>
-          
-          <li><a href="/categories/杂七杂八/">杂七杂八</a></li>
-          
-          <li><a href="/categories/中间件/">中间件</a></li>
-          
-          <li><a href="/categories/源码/">源码</a></li>
-          
-          <li><a href="/categories/数据智能/">数据智能</a></li>
-          
-          <li><a href="/categories/日常问题/">日常问题</a></li>
-          
-          <li><a href="/categories/架构设计/">架构设计</a></li>
-          
-          <li><a href="/categories/编程/">编程</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse编程" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              编程
-            </a>
-            <small class="text-muted">(Total 1 articles)</small>
-        </h4>
-    </div>
-    <div id="collapse编程" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading编程">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2020/06/24/reflection-to-get-a-class-private-method.html" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-06-24T09:29:25.561Z" itemprop="datePublished">2020-06-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 反射获取一个类的私有方法
-</a>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-RockeMQ 单机版在 centos 上的部署" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RockeMQ 单机版在 centos 上的部署
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/06/30/rockemq-standalone-version-deployment-on-centos.html" class="article-date">
+	  <time datetime="2020-06-30T10:14:15.737Z" itemprop="datePublished">2020-06-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/RocketMQ/" rel="tag">RocketMQ</a>
+  </span>
 
 
-              
-            </div>
-        </div>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/30/rockemq-standalone-version-deployment-on-centos.html#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 193(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
+	
+
+      </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。</p>
+<ol>
+<li><p>到镜像站下载安装包 wget <a href="http://mirror.bit.edu.cn/apache/rocketmq/4.7.1/rocketmq-all-4.7.1-bin-release.zip" target="_blank" rel="noopener">http://mirror.bit.edu.cn/apache/rocketmq/4.7.1/rocketmq-all-4.7.1-bin-release.zip</a> 并解压缩</p>
+</li>
+<li><p>修改 broker.conf 文件（conf/broker.conf）添加 naemServer 地址的属性以及自动创建 Topic 的属性。</p>
+<blockquote>
+<p>namesrvAddr = 127.0.0.1:9876</p>
+<p>autoCreateTopicEnable = true</p>
+</blockquote>
+</li>
+<li><p>修改启动参数（由于 rocketMQ 对内存的消耗比较大，所以测试时修改为本机合适的大小）。主要修改 bin 目录下的 runserver.sh 和 runbroker.sh 下的 JAVA_OPT 属性。</p>
+</li>
+<li><p>nohup sh bin/mqnamesrv &amp;</p>
+<p>nohup sh bin/mqbroker -c /root/download/rocketmq/conf/broker.conf &amp;</p>
+<p>sh bin/mqshutdown namesrv</p>
+<p>sh bin/mqshutdown broker</p>
+</li>
+<li><p>注意开放端口</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html" title="RockeMQ 单机版在 centos 上的部署" target="_blank" rel="external">http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xingcici" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xingcici" target="_blank"><span class="text-dark">行词</span><small class="ml-1x">中间件</small></a></h3>
+        <div>混迹互联网行业将近三年，业务和中间件都有涉猎，目前专注于中间件领域。欢迎探讨问题，联系邮箱 haifeng.pang@foxmail.com。</div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/06/24/reflection-to-get-a-class-private-method.html" title="反射获取一个类的私有方法"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -411,6 +507,39 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+    appKey: 'latjez4p0BqCqKM14wXbCg0b',
+    placeholder: '欢迎交流~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
