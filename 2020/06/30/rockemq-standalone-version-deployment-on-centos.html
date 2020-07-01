@@ -25,11 +25,13 @@
 <meta property="og:site_name" content="一方天地">
 <meta property="og:description" content="最近需要需要再研究下 RocketMQ 的文件系统的具体实现，于是重新在自己的服务器上安装了一遍，记录下过程。  到镜像站下载安装包 wget http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;rocketmq&#x2F;4.7.1&#x2F;rocketmq-all-4.7.1-bin-release.zip 并解压缩  修改 broker.conf 文件（conf&#x2F;broker.conf）添加 na">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200701133221711.png">
 <meta property="article:published_time" content="2020-06-30T10:14:15.737Z">
-<meta property="article:modified_time" content="2020-06-30T10:20:18.731Z">
+<meta property="article:modified_time" content="2020-07-01T05:34:11.679Z">
 <meta property="article:author" content="行词">
 <meta property="article:tag" content="RocketMQ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200701133221711.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html">
   
@@ -346,7 +348,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/06/30/rockemq-standalone-version-deployment-on-centos.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 193(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 245(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -374,6 +376,19 @@
 <p>sh bin/mqshutdown broker</p>
 </li>
 <li><p>注意开放端口</p>
+</li>
+</ol>
+<p>有几个坑要注意</p>
+<ol>
+<li><p>开放端口 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200701133221711.png" alt="image-20200701133221711"></p>
+</li>
+<li><p>我在部署的时候碰到 store 目录下没法自动建文件夹的问题。</p>
+</li>
+<li><p>broker.conf 增加配置</p>
+<blockquote>
+<p>namesrvAddr = 127.0.0.1:9876<br>brokerIP1=47.101.33.17<br>autoCreateTopicEnable = true</p>
+</blockquote>
 </li>
 </ol>
 
