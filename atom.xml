@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2020-07-01T05:34:11.679Z</updated>
+  <updated>2020-07-13T09:47:00.589Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FutureTask</title>
+    <link href="http://xingcici.github.io/2020/07/13/futuretask.html"/>
+    <id>http://xingcici.github.io/2020/07/13/futuretask.html</id>
+    <published>2020-07-13T09:44:52.627Z</published>
+    <updated>2020-07-13T09:47:00.589Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>我们实现 Callable 接口，在覆写的 call 方法中定义需要执行的业务逻辑；</p></li><li><p>然后把我们实现的 Callable 接口实现对象传给 FutureTask，然后 FutureTask 作为异步任务提交给线程执行；</p></li><li><p>最重要的是 FutureTask 内部维护了一个状态 state，任何操作（异步任务正常结束与否还是被取消）都是围绕着这个状态进行，并随时更新 state 任务的状态；</p></li><li><p>只能有一个线程执行异步任务，当异步任务执行结束后，此时可能正常结束，异常结束或被取消。</p></li><li><p>可以多个线程并发获取异步任务执行结果，当异步任务还未执行完，此时获取异步任务的线程将加入线程等待列表进行等待；</p></li><li><p>当异步任务线程执行结束后，此时会唤醒获取异步任务执行结果的线程，注意唤醒顺序是 “后进先出” 即后面加入的阻塞线程先被唤醒。</p></li><li><p>当我们调用 FutureTask.cancel 方法时并不能真正停止执行异步任务的线程，只是发出中断线程的信号。但是只要 cancel 方法返回 true，此时即使异步任务能正常执行完，此时我们调用 get 方法获取结果时依然会抛出 CancellationException 异常。</p></li></ol><ol><li>利用 LockSupport 来实现线程的阻塞 \ 唤醒机制；</li><li>利用 volatile 和 UNSAFE 的 CAS 方法来实现线程共享变量的无锁化操作；</li><li>若要编写超时异常的逻辑可以参考 FutureTask 的 get(long timeout, TimeUnit unit) 的实现逻辑；</li><li>多线程获取某一成员变量结果时若需要等待时的线程等待链表的逻辑实现；</li><li>某一异步任务在某一时刻只能由单一线程执行的逻辑实现；</li><li>FutureTask 中的任务状态 state 的变化处理的逻辑实现。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;我们实现 Callable 接口，在覆写的 call 方法中定义需要执行的业务逻辑；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后把我们实现的 Callable 接口实现对象传给 FutureTask，然后 FutureTask 作为异步任务提交给线程执行；&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="源码" scheme="http://xingcici.github.io/categories/%E6%BA%90%E7%A0%81/"/>
+    
+    
+      <category term="JDK" scheme="http://xingcici.github.io/tags/JDK/"/>
+    
+  </entry>
   
   <entry>
     <title>RockeMQ 单机版在 centos 上的部署</title>
@@ -77,9 +106,9 @@
     <link href="http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html"/>
     <id>http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</id>
     <published>2020-06-24T09:01:25.741Z</published>
-    <updated>2020-06-24T09:02:42.779Z</updated>
+    <updated>2020-07-01T07:10:45.920Z</updated>
     
-    <content type="html"><![CDATA[<p>作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计、消息从 Broker 接收到持久化磁盘的流程、刷盘策略和内存映射优化机制。</p>]]></content>
+    <content type="html"><![CDATA[<p>作为一款高性能的消息中间件，RocketMQ 基于互联网的生产要求对多 Topic 场景做了诸多针对性优化。根据中间件团队提供的压测报告，在 Producer 和 Consumer 共存的情况下，相比于 Kafka，RocketMQ 的性能指标（TPS 和 RT）随着 Topic 数量的上升表现稳定。本文从消息存储的角度谈谈 RocketMQ 高性能的原因，重点包括四个方面：消息文件存储的结构设计、消息从 Broker 接收到持久化磁盘的流程、刷盘策略和内存映射优化机制。</p><h3 id="消息文件存储结构设计"><a href="#消息文件存储结构设计" class="headerlink" title="消息文件存储结构设计"></a>消息文件存储结构设计</h3><h3 id="消息持久化"><a href="#消息持久化" class="headerlink" title="消息持久化"></a>消息持久化</h3><h3 id="刷盘策略"><a href="#刷盘策略" class="headerlink" title="刷盘策略"></a>刷盘策略</h3><h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3>]]></content>
     
     <summary type="html">
     

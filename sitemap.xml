@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xingcici.github.io/2020/07/13/futuretask.html</loc>
+    
+    <lastmod>2020-07-13T09:47:00.589Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</loc>
+    
+    <lastmod>2020-07-01T07:10:45.920Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xingcici.github.io/2020/06/30/rockemq-standalone-version-deployment-on-centos.html</loc>
     
     <lastmod>2020-07-01T05:34:11.679Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://xingcici.github.io/2020/06/24/reflection-to-get-a-class-private-method.html</loc>
     
     <lastmod>2020-06-30T03:33:21.715Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xingcici.github.io/2020/06/24/design-and-implementation-of-rocketmq-message-storage.html</loc>
-    
-    <lastmod>2020-06-24T09:02:42.779Z</lastmod>
     
   </url>
   
