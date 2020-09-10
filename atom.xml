@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2020-07-13T11:20:42.193Z</updated>
+  <updated>2020-09-10T09:18:15.091Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Skywalking 6.6.0对arthas的兼容性问题</title>
+    <link href="http://xingcici.github.io/2020/09/10/skywalking-660-compatibility-issues-with-arthas.html"/>
+    <id>http://xingcici.github.io/2020/09/10/skywalking-660-compatibility-issues-with-arthas.html</id>
+    <published>2020-09-10T09:08:08.549Z</published>
+    <updated>2020-09-10T09:18:15.091Z</updated>
+    
+    <content type="html"><![CDATA[<p>[arthas@24580]$ trace com.mysql.jdbc.PreparedStatement execute<br>Affect(class count: 1 , method count: 5) cost in 480 ms, listenerId: 8<br>Enhance error! exception: java.lang.UnsupportedOperationException: class redefinition failed: attempted to change superclass or interfaces<br>error happens when enhancing class: class redefinition failed: attempted to change superclass or interfaces, check arthas log: /home/www/logs/arthas/arthas.log</p><p>2020-09-10 17:05:24 [arthas-command-execute] INFO  c.t.arthas.core.advisor.Enhancer -enhance matched classes: [class com.mysql.jdbc.PreparedStatement, class com.mysql.jdbc.JDBC4PreparedStatement, class com.mysql.jdbc.CallableStatement, class com.mysql.jdbc.ServerPreparedStatement]<br>2020-09-10 17:05:24 [arthas-command-execute] ERROR c.t.arthas.core.advisor.Enhancer -Enhancer error, matchingClasses: [class com.mysql.jdbc.PreparedStatement, class com.mysql.jdbc.JDBC4PreparedStatement, class com.mysql.jdbc.CallableStatement, class com.mysql.jdbc.ServerPreparedStatement]<br>java.lang.UnsupportedOperationException: class redefinition failed: attempted to change superclass or interfaces<br>    at sun.instrument.InstrumentationImpl.retransformClasses0(Native Method)<br>    at sun.instrument.InstrumentationImpl.retransformClasses(InstrumentationImpl.java:144)<br>    at com.taobao.arthas.core.advisor.Enhancer.enhance(Enhancer.java:368)<br>    at com.taobao.arthas.core.command.monitor200.EnhancerCommand.enhance(EnhancerCommand.java:149)<br>    at com.taobao.arthas.core.command.monitor200.EnhancerCommand.process(EnhancerCommand.java:96)<br>    at com.taobao.arthas.core.shell.command.impl.AnnotatedCommandImpl.process(AnnotatedCommandImpl.java:82)<br>    at com.taobao.arthas.core.shell.command.impl.AnnotatedCommandImpl.access$100(AnnotatedCommandImpl.java:18)<br>    at com.taobao.arthas.core.shell.command.impl.AnnotatedCommandImpl$ProcessHandler.handle(AnnotatedCommandImpl.java:111)<br>    at com.taobao.arthas.core.shell.command.impl.AnnotatedCommandImpl$ProcessHandler.handle(AnnotatedCommandImpl.java:108)<br>    at com.taobao.arthas.core.shell.system.impl.ProcessImpl$CommandProcessTask.run(ProcessImpl.java:385)<br>    at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)<br>    at java.util.concurrent.FutureTask.run(FutureTask.java:266)<br>    at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)<br>    at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)<br>    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)<br>    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)<br>    at java.lang.Thread.run(Thread.java:745)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[arthas@24580]$ trace com.mysql.jdbc.PreparedStatement execute&lt;br&gt;Affect(class count: 1 , method count: 5) cost in 480 ms, listenerId: 8&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+      <category term="链路追踪" scheme="http://xingcici.github.io/tags/%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/"/>
+    
+  </entry>
   
   <entry>
     <title>零知识证明</title>
