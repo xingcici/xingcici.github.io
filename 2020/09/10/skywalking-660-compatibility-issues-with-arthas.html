@@ -26,7 +26,7 @@
 <meta property="og:description" content="背景目前在参与公司全链路压测项目，在部署到日常环境服务进行测试时，用 arthas 进行追踪排查问题发现无法追踪被 agent 增强的类。于是尝试解决这个问题。 报错如下 12345678910111213141516171819202122232425262728&#x2F;&#x2F;arthas trace 时命令行报错[arthas@24580]$ trace com.mysql.jdbc">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-10T09:08:08.549Z">
-<meta property="article:modified_time" content="2020-09-10T10:40:18.145Z">
+<meta property="article:modified_time" content="2020-09-11T03:29:25.141Z">
 <meta property="article:author" content="行词">
 <meta property="article:tag" content="链路追踪">
 <meta name="twitter:card" content="summary">
@@ -346,7 +346,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/10/skywalking-660-compatibility-issues-with-arthas.html#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 561(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 730(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
@@ -363,6 +363,13 @@
 
 
 <h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>首先 skywalking 和 arthas 都是目前比较受欢迎的开源项目，我们应该不是第一个碰到这个问题的人。Github 一搜，果然不少人都碰到了这个问题（部分资料见参考资料）。</p>
+<p>其中 arthas 维护团队的一位成员已经对 skywalking 提出了 pr，并已经合并到 matser，但是我们是 6.6.0，master 已经是 8.x。只能参考下进行改造。</p>
+<p>基本的改造点为：</p>
+<ol>
+<li>开源代码中的方案包括了 文件 和 内存缓存两种方式，我们不需要文件这种比较重量级的方式，于是去掉了，而且将内存的方式改为了LRU。</li>
+<li>6.6.0 加载自定义 CacheableTransformerDecorator 的方式和 8.x 不太一样，主要是 bytebuddy 版本差异造成的。6.6.0 加载的地方为 agentBuilder.installOn(x,x) 。</li>
+</ol>
+<p>这样改造后基本就能兼容 arthas 了。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
 <li><p>[skywalking 6.4.0 版本兼容性]:<a href="https://github.com/alibaba/arthas/issues/898" target="_blank" rel="noopener">https://github.com/alibaba/arthas/issues/898</a></p>
 </li>
