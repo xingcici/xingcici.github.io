@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165814330.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165310098.png">
 <meta property="article:published_time" content="2021-01-27T08:45:19.027Z">
-<meta property="article:modified_time" content="2021-01-27T09:02:16.310Z">
+<meta property="article:modified_time" content="2021-01-27T09:03:22.064Z">
 <meta property="article:author" content="行词">
 <meta property="article:tag" content="hadoop">
 <meta name="twitter:card" content="summary">
@@ -474,7 +474,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public int getPartition(Text text, Text value, int numPartitions) &#123;    long key &#x3D; Long.parseLong((text.toString().split(&quot;_&quot;))[0]);    return (int) (key&#x2F;100%numPartitions); &#125;</span><br></pre></td></tr></table></figure>
 
 <p>增加了一个 partition，专门给这些数据上有连续性的表用，将连续的 ID 发送到同一个 reduce 输出。sub最后两位是观察我们DB里的数据的连续性得出的经验值。</p>
-<p>最后研究下 parquet 的编码对 parquet 本身压缩率有多大的影响。</p>
+<h3 id="四、解决问题之外的研究"><a href="#四、解决问题之外的研究" class="headerlink" title="四、解决问题之外的研究"></a>四、解决问题之外的研究</h3><p>最后研究下 parquet 的编码对 parquet 本身压缩率有多大的影响。</p>
 <p>开启 SNAPPY 压缩，自定义分区方式重跑 ods_itm_wd_inv_app_item_sku_d 任务结果体积大小及编码结果</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165125612.png" alt="image-20210127165125612"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165142007.png" alt="image-20210127165142007"></p>
