@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-01-27T09:04:17.617Z</updated>
+  <updated>2021-01-27T12:30:33.906Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>去中心化消息队列 Meta MQ</title>
+    <link href="http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html"/>
+    <id>http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html</id>
+    <published>2021-01-27T12:25:24.885Z</published>
+    <updated>2021-01-27T12:30:33.906Z</updated>
+    
+    <content type="html"><![CDATA[<p>虽然网上很多人说不要反复造轮子，但是就我个人的想法是造自己没造过的轮子是有利于技术的进步的。</p><p>最近时间稍微宽裕了一点，开始写一个去中心化的消息队列，暂时命名为 Meta MQ。</p><p>通过写这个消息队列，不断来深入理解业界目前消息队列的设计和原理，以及分布式协议，网络，存储方面的知识。</p><p>目前完成了最初步的功能，后面会不断得添砖加瓦~</p><p>[Meta MQ 地址][<a href="https://github.com/xingcici/meta-mq]" target="_blank" rel="noopener">https://github.com/xingcici/meta-mq]</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;虽然网上很多人说不要反复造轮子，但是就我个人的想法是造自己没造过的轮子是有利于技术的进步的。&lt;/p&gt;
+&lt;p&gt;最近时间稍微宽裕了一点，开始写一个去中心化的消息队列，暂时命名为 Meta MQ。&lt;/p&gt;
+&lt;p&gt;通过写这个消息队列，不断来深入理解业界目前消息队列的设计和原理，以及
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+      <category term="MQ" scheme="http://xingcici.github.io/tags/MQ/"/>
+    
+  </entry>
   
   <entry>
     <title>MR产出数据体积变大问题</title>
@@ -507,30 +535,6 @@
     
     
       <category term="架构设计" scheme="http://xingcici.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>中小型公司数仓摸索和应用</title>
-    <link href="http://xingcici.github.io/2020/04/08/exploration-and-application-of-data-warehouse-for-small-mediumsized-companies.html"/>
-    <id>http://xingcici.github.io/2020/04/08/exploration-and-application-of-data-warehouse-for-small-mediumsized-companies.html</id>
-    <published>2020-04-08T05:12:24.879Z</published>
-    <updated>2020-06-24T06:59:04.261Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>熬过创业初期的互联网公司一般发展迅速。一方面是业务的迅速发展，另一方面是数据的迅速累积。在获客成本越来越高的当下，谁利用好手中积累的数据来更好的服务于业务的发展，做到精细化运营，谁就能在竞争中获得领先优势。</p><p>对分析数据而言，数仓是必不可少的基础。在惠借科技之前的两年里，数据分析方面并没有一个清晰的数仓这样的概念，导致数据分析过程中一系列例如数据来源不一致，表过多和界限混乱等问题。最终导致的结果就是对业务响应慢，数据可能不准确。所有重新分析和搭建适合惠借的数仓是迫在眉睫的事情。惠借技术团队和BI团队经过两三个月，也算是初步完成了数仓的选型和分层。在此简单介绍下整个过程。</p><h4 id="现状和需求分析"><a href="#现状和需求分析" class="headerlink" title="现状和需求分析"></a>现状和需求分析</h4><p>目前公司内部BI团队是应用阿里云的maxcompute作为数据分析和平台。应用场景大部分是对用户部分行为进行分析和对订单进行分析，集群配置为10CU，数据量为几百GB，每天新增数据量最多几十GB。新的技术和平台肯定要能支撑起目前的业务需求同时能部分满足未来的扩展需求。</p><h4 id="技术和平台选型"><a href="#技术和平台选型" class="headerlink" title="技术和平台选型"></a>技术和平台选型</h4><p>正如前言所言，我们在选型时也面临着自建和使用第三方平台的问题。我们在一开始进行技术选型时也优先考虑自建Hadoop集群，并用Cloudera Manager在测试环境搭建了一套Hadoop环境。不得不说现在搭建一套Hadoop环境还是很方便的。Cloudera Manager集成了一系列的部署、配置和监控等功能。</p><p>然而并不是搭建一个Hadoop环境就万事大吉了。在Hadoop的调研和测试使用过程中，我们发现Hadoop对集群机器的配置要求很高，而且还有各种复杂的配置。其中配置又是特别重要的部分，需要针对不同的机器配置和实际情况进行配置才能达到最优的效果。现实情况是，我们目前并没有专业的偏向于这方面维护和调优的工程师，这就意味着自建的话在以后的使用过程中遇到各种问题的话，会有<code>较高的维护和解决问题的成本</code>。</p><p>我们转而将视线放在目前我们正在使用的 Maxcompute。看了Maxcompute文档后发现是阿里云基于Hadoop开发的云上大数据平台。我们目前服务器、线上数据库及日志都是采用阿里云提供的服务，而Maxcompute提供了一系列的与阿里云目前的产品配合的功能。例如数据直接从RDS导入，日志文件由LogHub投递到Maxcompute等。很大程度上方便我们的使用。同时减少了BI同学的学习成本。而后在经济成本方面进行了简单的计算发现，在我们目前的需要的配置下，直接使用Maxcompute的成本要低于自建Hadoop成本。</p><p>最后我们决定基于阿里云Maxcompte来搭建我们新的数仓体系。</p><h4 id="数仓设计"><a href="#数仓设计" class="headerlink" title="数仓设计"></a>数仓设计</h4><p><img src="https://pic.downk.cc/item/5e8d60ac504f4bcb04f0de8c.png" alt=""></p><p>上图就是我们目前的第一版数仓的设计。因为采用了Maxcompute，所以我们目前并不需要特别关注存储层的设计，而是专注于数仓层的设计。</p><p>数仓最底层是 <code>近源数据层</code>，该层的数据直接从各种数据源进入，仅仅进行一些简单的ETL过程。一般来说会直接和外部数据源的结构进行映射。</p><p>在近源数据层上方是 <code>基础数据层</code>，基础数据层的数据从近源数据抽取，经过清洗和转化后形成我们设计好的基础表等。</p><p>基础数据上方为<code>宽表和主题表</code>，该层的数据由基础数据层转化和组合而成。表的主题由BI同学对业务进行分析后得到。</p><p>最后数据形成 <code>数据集市</code>，这是能够直接满足业务需求的数据。这里的数据可以导出到RDS中提供给业务方使用。也可以提供给BI分析工具使用，例如我们计划使用的 SuperSet BI分析工具等。</p><h4 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h4><p>其实在之前我们也是用 Maxcompute，那为什么还是需要重新构建呢。因为我们之前在使用的过程中，并没有参考数仓的一般规范及阿里云的Maxcompute最佳实践，导致使用过程中产生很多问题。最简单的例子就是表的命名没有遵循分层的命名规范，命名很混乱。所以定义 <code>一系列的规范来约束开发过程是十分必要的</code>,我们公司内部的规范仍在不断地完善中。</p><h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>至此初步的数仓搭建已经结束，这是我们数仓的1.0版本，后续随着业务的变化和发展，数仓也会进行相应的调整来满足需求。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;熬过创业初期的互联网公司一般发展迅速。一方面是业务的迅速发展，另一方面是数据的迅速累积。在获客成本越来越高的当下，谁利用好手中积累的数据来更
-      
-    
-    </summary>
-    
-    
-      <category term="数据智能" scheme="http://xingcici.github.io/categories/%E6%95%B0%E6%8D%AE%E6%99%BA%E8%83%BD/"/>
     
     
   </entry>
