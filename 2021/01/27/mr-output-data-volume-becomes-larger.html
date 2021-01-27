@@ -25,23 +25,23 @@
 <meta property="og:site_name" content="一方天地">
 <meta property="og:description" content="一、现象在切换到MR后，总共36个任务，10个变小，16个不变，10个变大，按目前增大体积来计算，每天比之前增加2.5T，不过大幅增加的表周期都是30天的，预计在7天后不会再大幅增加。 下图是用 parquet-tools 解析文件获得到，可以看到，左侧 outscan 比 右侧 mr 在好几个column上压缩率都高不少 ods_trd_buyer_order_app_order_desc_in">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165009947.png">
-<meta property="og:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165033055.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165937262.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165912092.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165049558.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165125612.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165142007.png">
-<meta property="og:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165159290.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165848742.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165221964.png">
-<meta property="og:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165235688.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165830347.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165246366.png">
-<meta property="og:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165259671.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165814330.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165310098.png">
 <meta property="article:published_time" content="2021-01-27T08:45:19.027Z">
-<meta property="article:modified_time" content="2021-01-27T08:56:34.330Z">
+<meta property="article:modified_time" content="2021-01-27T09:00:15.852Z">
 <meta property="article:author" content="行词">
 <meta property="article:tag" content="hadoop">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xingcici.github.io/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165009947.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165937262.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://xingcici.github.io/2021/01/27/mr-output-data-volume-becomes-larger.html">
   
@@ -371,9 +371,9 @@
         <h3 id="一、现象"><a href="#一、现象" class="headerlink" title="一、现象"></a>一、现象</h3><p>在切换到MR后，总共36个任务，10个变小，16个不变，10个变大，按目前增大体积来计算，每天比之前增加2.5T，不过大幅增加的表周期都是30天的，预计在7天后不会再大幅增加。</p>
 <p>下图是用 parquet-tools 解析文件获得到，可以看到，左侧 outscan 比 右侧 mr 在好几个column上压缩率都高不少</p>
 <p>ods_trd_buyer_order_app_order_desc_info_d</p>
-<p><img src="/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165009947.png" alt="image-20210127165009947"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165937262.png" alt="image-20210127165937262"></p>
 <p>ods_itm_wd_inv_app_item_sku_d 则更加明显</p>
-<p><img src="/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165033055.png" alt="image-20210127165033055"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165912092.png" alt="image-20210127165912092"></p>
 <h3 id="二、研究"><a href="#二、研究" class="headerlink" title="二、研究"></a>二、研究</h3><h4 id="1、outscan和mr同步的区别。"><a href="#1、outscan和mr同步的区别。" class="headerlink" title="1、outscan和mr同步的区别。"></a>1、outscan和mr同步的区别。</h4><table>
 <thead>
 <tr>
@@ -479,14 +479,14 @@
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165125612.png" alt="image-20210127165125612"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165142007.png" alt="image-20210127165142007"></p>
 <p>关闭SNAPPY压缩后，自定义分区方式重新跑 ods_itm_wd_inv_app_item_sku_d 任务结果体积大小及编码结果。</p>
-<p><img src="/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165159290.png" alt="image-20210127165159290"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165848742.png" alt="image-20210127165848742"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165221964.png" alt="image-20210127165221964"></p>
 <p>关闭SNAPPY压缩后，默认分区方式重新跑 ods_itm_wd_inv_app_item_sku_d 任务结果体积大小及编码结果。</p>
-<p><img src="/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165235688.png" alt="image-20210127165235688"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165830347.png" alt="image-20210127165830347"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165246366.png" alt="image-20210127165246366"></p>
 <p>根据上面的数据可以得出，在数据密集的情况下，parquet 本身对数据的压缩率就会高一些，在数据不密集的情况下 5.1T ，数据密集的情况下 3.7T。</p>
 <p>下面两张图可以看到，有序和无序对都是字符的 title 列的编码方式影响不大，都用PLAIN编码。</p>
-<p><img src="/Users/elvin/Library/Application%20Support/typora-user-images/image-20210127165259671.png" alt="image-20210127165259671"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165814330.png" alt="image-20210127165814330"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210127165310098.png" alt="image-20210127165310098"></p>
 
       
