@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-01-27T12:30:33.906Z</updated>
+  <updated>2021-01-27T12:32:03.777Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html"/>
     <id>http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html</id>
     <published>2021-01-27T12:25:24.885Z</published>
-    <updated>2021-01-27T12:30:33.906Z</updated>
+    <updated>2021-01-27T12:32:03.777Z</updated>
     
-    <content type="html"><![CDATA[<p>虽然网上很多人说不要反复造轮子，但是就我个人的想法是造自己没造过的轮子是有利于技术的进步的。</p><p>最近时间稍微宽裕了一点，开始写一个去中心化的消息队列，暂时命名为 Meta MQ。</p><p>通过写这个消息队列，不断来深入理解业界目前消息队列的设计和原理，以及分布式协议，网络，存储方面的知识。</p><p>目前完成了最初步的功能，后面会不断得添砖加瓦~</p><p>[Meta MQ 地址][<a href="https://github.com/xingcici/meta-mq]" target="_blank" rel="noopener">https://github.com/xingcici/meta-mq]</a></p>]]></content>
+    <content type="html"><![CDATA[<p>虽然网上很多人说不要反复造轮子，但是就我个人的想法是造自己没造过的轮子是有利于技术的进步的。</p><p>最近时间稍微宽裕了一点，开始写一个去中心化的消息队列，暂时命名为 Meta MQ。</p><p>通过写这个消息队列，不断来深入理解业界目前消息队列的设计和原理，以及分布式协议，网络，存储方面的知识。</p><p>目前完成了最初步的功能，后面会不断得添砖加瓦~</p><p><a href="https://github.com/xingcici/meta-mq" target="_blank" rel="noopener">Meta MQ 地址</a></p>]]></content>
     
     <summary type="html">
     
