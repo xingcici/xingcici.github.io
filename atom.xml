@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-01-27T12:32:03.777Z</updated>
+  <updated>2021-01-28T10:07:21.929Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>synchronized 和 static synchronized</title>
+    <link href="http://xingcici.github.io/2021/01/28/synchronized-and-static.html"/>
+    <id>http://xingcici.github.io/2021/01/28/synchronized-and-static.html</id>
+    <published>2021-01-28T10:03:14.200Z</published>
+    <updated>2021-01-28T10:07:21.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>挺简单的一个问题，今天被人问起了顺手写一个。</p><p>其实 synchronized 是实例对象锁，而 static 是类对象锁。每个类类对象在一个classloader只会有一个。</p><p>下面两段简单的代码就能验证</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package lock;</span><br><span class="line"></span><br><span class="line">import com.meta.mq.common.utils.ThreadUtil;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : haifeng.pang.</span><br><span class="line"> * @version 0.1 : Human v0.1 2021&#x2F;1&#x2F;28 下午5:48 By haifeng.pang.</span><br><span class="line"> * @description :</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Human &#123;</span><br><span class="line"></span><br><span class="line">    public synchronized void say(String name) &#123;</span><br><span class="line">        System.out.println(&quot;say &quot; + name);</span><br><span class="line">        ThreadUtil.quietSleep(10000);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void eat(String name) &#123;</span><br><span class="line">        System.out.println(&quot;eat &quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static synchronized void sayStatic(String name) &#123;</span><br><span class="line">        System.out.println(&quot;static say&quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static synchronized void eatStatic(String name) &#123;</span><br><span class="line">        System.out.println(&quot;static eat&quot; + name);</span><br><span class="line">        ThreadUtil.quietSleep(10000);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package lock;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : haifeng.pang.</span><br><span class="line"> * @version 0.1 : Test v0.1 2021&#x2F;1&#x2F;28 下午5:49 By haifeng.pang.</span><br><span class="line"> * @description :</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @org.junit.Test</span><br><span class="line">    public void test() &#123;</span><br><span class="line">        Human human &#x3D; new Human();</span><br><span class="line">        Human human1 &#x3D; new Human();</span><br><span class="line">        Thread threadA &#x3D; new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                human.say(&quot;im threadA&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread threadB &#x3D; new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                human.eat(&quot;im threadB&quot;);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        threadA.start();</span><br><span class="line"></span><br><span class="line">        threadB.start();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            threadA.join();</span><br><span class="line">            threadB.join();</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            &#x2F;&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;挺简单的一个问题，今天被人问起了顺手写一个。&lt;/p&gt;
+&lt;p&gt;其实 synchronized 是实例对象锁，而 static 是类对象锁。每个类类对象在一个classloader只会有一个。&lt;/p&gt;
+&lt;p&gt;下面两段简单的代码就能验证&lt;/p&gt;
+&lt;figure class=&quot;hi
+      
+    
+    </summary>
+    
+    
+      <category term="源码" scheme="http://xingcici.github.io/categories/%E6%BA%90%E7%A0%81/"/>
+    
+    
+      <category term="jdk" scheme="http://xingcici.github.io/tags/jdk/"/>
+    
+  </entry>
+  
+  <entry>
     <title>去中心化消息队列 Meta MQ</title>
     <link href="http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html"/>
     <id>http://xingcici.github.io/2021/01/27/decentralized-message-queue-meta-mq.html</id>
     <published>2021-01-27T12:25:24.885Z</published>
-    <updated>2021-01-27T12:32:03.777Z</updated>
+    <updated>2021-01-27T12:32:14.453Z</updated>
     
     <content type="html"><![CDATA[<p>虽然网上很多人说不要反复造轮子，但是就我个人的想法是造自己没造过的轮子是有利于技术的进步的。</p><p>最近时间稍微宽裕了一点，开始写一个去中心化的消息队列，暂时命名为 Meta MQ。</p><p>通过写这个消息队列，不断来深入理解业界目前消息队列的设计和原理，以及分布式协议，网络，存储方面的知识。</p><p>目前完成了最初步的功能，后面会不断得添砖加瓦~</p><p><a href="https://github.com/xingcici/meta-mq" target="_blank" rel="noopener">Meta MQ 地址</a></p>]]></content>
     
@@ -510,31 +539,6 @@
     
     
       <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>针对流量的AB test 的一点思考</title>
-    <link href="http://xingcici.github.io/2020/04/08/some-thoughts-on-ab-test-for-traffic.html"/>
-    <id>http://xingcici.github.io/2020/04/08/some-thoughts-on-ab-test-for-traffic.html</id>
-    <published>2020-04-08T05:19:40.257Z</published>
-    <updated>2020-06-24T06:59:04.263Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。</p><h4 id="在阅读下述方案之前-我们需要明确几个定义"><a href="#在阅读下述方案之前-我们需要明确几个定义" class="headerlink" title="在阅读下述方案之前 我们需要明确几个定义"></a>在阅读下述方案之前 我们需要明确几个定义</h4><ul><li><p>AB TEST 方案分版本，不同的 AB TEST 方案拥有不同的标识，例如 ABTEST_2020_01_01。</p></li><li><p>某个确定的 AB TEST 版本下，会有不同的分组，每个分组也有确定的标识，例如 GROUP_A。下文中的 AB TEST 桶 ，指的就是不同的分组。</p></li><li><p>流量进入后会被打上一个或者多个 AB TEST 版本标识及 AB TEST 桶标识。</p></li></ul><h4 id="单纯针对该需求的方案"><a href="#单纯针对该需求的方案" class="headerlink" title="单纯针对该需求的方案"></a>单纯针对该需求的方案</h4><p>目标: 相同用户返回相同落地页 不同用户根据比例返回不同落地页 跟踪不同落地页转化效率 </p><p>方案: 根据ABTEST版本 建立唯一标识, 请求跳转链接时根据用的IP或者CookieId进行HASH，根据HASH命中区间( AB TEST 桶)返回不同的落地页，返回结果时带上TEST版本标识，转化效率的跟踪在H5进行。同时留有后门方便指定用户分入不同的区间中。</p><h4 id="更通用的方案-也只是简略描述-具体还要根据详细的需求来细化"><a href="#更通用的方案-也只是简略描述-具体还要根据详细的需求来细化" class="headerlink" title="更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)"></a>更通用的方案(也只是简略描述 具体还要根据详细的需求来细化)</h4><p>目标: 根据不同用户特征返回不同结果，跟踪不同返回结果的转化效率。 </p><ul><li>思路A 流量完全分层 所有流量可以循环利用 一个请求可以用于多个 AB TEST</li></ul><p>方案:</p><ol><li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID</p></li><li><p>设置 AB TEST 方案，每个AB TEST方案都有唯一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪，每个 AB TEST 桶可以设置一定比例的流量。 </p></li><li><p>在网关设置过滤器，对进入的符合要求的流量特征进行HASH(同时也可以针对特定的用户标识强行进行分组,方便测试)，打上进行中的 AB TEST 方案的标识， 再根据该 AB TEST 方案打上 AB TEST 桶的标识。再对该流量进行下一次循环，查询是否还有 AB TEST 方案可以利用它，有的话则继续进行标记。符合最后的标记可能是类似于TESTA_GROUP1|TESTB_GROUP2。</p></li><li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。</p></li></ol><p>存在的问题：当不同的 AB TEST 方案对相同页面做实验时就会出现问题。</p><ul><li>思路B 流量预先分桶 一个请求只能用于一个 AB TEST </li></ul><p>方案:</p><ol><li><p>设置要针对的特征，圈定范围用户。比如 用户的IP 用户的 OPENID。</p></li><li><p>设置实验方案，每个 AB TEST 方案都有每一标识。再在 AB TEST 方案中，根据不同特征或者比例设置不同的 AB TEST 桶，每个 AB TEST 桶都有一个唯一标识用于跟踪。 </p></li><li><p>在网关设置过滤器，对圈定范围流量先随机进行HASH，按实验需要的流量大小随机分到不同的流量桶中，再在流量桶中实施具体的 AB TEST 方案， 再根据该 AB TEST 方案打上 AB TEST 桶的标识 例如 TESTA_GROUP1，随后直接进入服务端。 </p></li><li><p>流量到服务的时候，根据标识返回不同的结果，在返回的同时带上 AB TEST 方案的标识。 </p></li></ol><p>存在的问题：当 AB TEST 方案逐渐增加时，后来增加的 AB TEST 方案可能无法获取到足够的流量 </p><p>附图 </p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20200623190239794.png" alt="image-20200623190239794"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;之前公司提了个需求，不同比例的用户导向不同的落地页，统计转化效率。我调研了一些业界的方案后有了一些自己的思考。&lt;/p&gt;
-&lt;h4 id=&quot;在阅读下述方案之前-我们需要明确几个定义&quot;&gt;&lt;a href=&quot;#在阅读下述方案之前-我们需要明确几个定义&quot; class=&quot;headerli
-      
-    
-    </summary>
-    
-    
-      <category term="架构设计" scheme="http://xingcici.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     
     
   </entry>
