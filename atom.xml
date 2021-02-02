@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-01-28T10:07:49.046Z</updated>
+  <updated>2021-02-02T03:03:09.874Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HTTPS 加密协商过程</title>
+    <link href="http://xingcici.github.io/2021/02/01/https-encryption-negotiation-process.html"/>
+    <id>http://xingcici.github.io/2021/02/01/https-encryption-negotiation-process.html</id>
+    <published>2021-02-01T09:03:59.926Z</published>
+    <updated>2021-02-02T03:03:09.874Z</updated>
+    
+    <content type="html"><![CDATA[<p>HTTPS协商过程中涉及两个角色：client、server。client 大部分情况下可以认为是浏览器。这里会省略去一些加密协议之类的东西。</p><p>1、client 生成随机数 client_random，发送给 server。</p><p>2、server 生成随机数 server_random，再加上证书和签名，返回给 client，证书中包含公钥。</p><p>3、client 对证书进行 hash 生成 hash 串，然后用浏览器内置的 CA 公钥对签名进行验证，对比 hash 串和签名验证结果。</p><p>4、client 再生成一个随机数，与 client_random和 server_random 一起生成一个 shared secret(最终加密用),  再对这次生成的随机数用公钥进行加密生成（pre-master key），发送给 server。同时发送一个用 shared secret 加密的验证消息。</p><p>5、server 对 pre-master key 用私钥进行解密，获得随机数，再用 client_random、server_random 一起也算出 shared secret，对 client 发送的验证消息进行验证。再回复 client 一个也用 shared secret 加密的数据，表示自己准备好了。</p><p>6、在后续的传输过程中，还会对传输内容进行摘要，来验证内容的完整性。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;HTTPS协商过程中涉及两个角色：client、server。client 大部分情况下可以认为是浏览器。这里会省略去一些加密协议之类的东西。&lt;/p&gt;
+&lt;p&gt;1、client 生成随机数 client_random，发送给 server。&lt;/p&gt;
+&lt;p&gt;2、server 生
+      
+    
+    </summary>
+    
+    
+      <category term="加密" scheme="http://xingcici.github.io/categories/%E5%8A%A0%E5%AF%86/"/>
+    
+    
+      <category term="https" scheme="http://xingcici.github.io/tags/https/"/>
+    
+  </entry>
+  
+  <entry>
     <title>synchronized 和 static synchronized</title>
     <link href="http://xingcici.github.io/2021/01/28/synchronized-and-static.html"/>
     <id>http://xingcici.github.io/2021/01/28/synchronized-and-static.html</id>
     <published>2021-01-28T10:03:14.200Z</published>
-    <updated>2021-01-28T10:07:49.046Z</updated>
+    <updated>2021-01-28T10:08:00.494Z</updated>
     
     <content type="html"><![CDATA[<p>挺简单的一个问题，今天被人问起了顺手写一下。</p><p>其实 synchronized 是实例对象锁，而 static 是类对象锁。每个类类对象在一个classloader只会有一个。</p><p>下面两段简单的代码就能验证</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package lock;</span><br><span class="line"></span><br><span class="line">import com.meta.mq.common.utils.ThreadUtil;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : haifeng.pang.</span><br><span class="line"> * @version 0.1 : Human v0.1 2021&#x2F;1&#x2F;28 下午5:48 By haifeng.pang.</span><br><span class="line"> * @description :</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Human &#123;</span><br><span class="line"></span><br><span class="line">    public synchronized void say(String name) &#123;</span><br><span class="line">        System.out.println(&quot;say &quot; + name);</span><br><span class="line">        ThreadUtil.quietSleep(10000);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void eat(String name) &#123;</span><br><span class="line">        System.out.println(&quot;eat &quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static synchronized void sayStatic(String name) &#123;</span><br><span class="line">        System.out.println(&quot;static say&quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static synchronized void eatStatic(String name) &#123;</span><br><span class="line">        System.out.println(&quot;static eat&quot; + name);</span><br><span class="line">        ThreadUtil.quietSleep(10000);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package lock;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : haifeng.pang.</span><br><span class="line"> * @version 0.1 : Test v0.1 2021&#x2F;1&#x2F;28 下午5:49 By haifeng.pang.</span><br><span class="line"> * @description :</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @org.junit.Test</span><br><span class="line">    public void test() &#123;</span><br><span class="line">        Human human &#x3D; new Human();</span><br><span class="line">        Human human1 &#x3D; new Human();</span><br><span class="line">        Thread threadA &#x3D; new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                human.say(&quot;im threadA&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread threadB &#x3D; new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                human.eat(&quot;im threadB&quot;);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        threadA.start();</span><br><span class="line"></span><br><span class="line">        threadB.start();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            threadA.join();</span><br><span class="line">            threadB.join();</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            &#x2F;&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -516,30 +544,6 @@
     
     
       <category term="dubbo" scheme="http://xingcici.github.io/tags/dubbo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sentinel生产环境改造实践</title>
-    <link href="http://xingcici.github.io/2020/04/08/sentinel-production-environment-transformation-practice.html"/>
-    <id>http://xingcici.github.io/2020/04/08/sentinel-production-environment-transformation-practice.html</id>
-    <published>2020-04-08T05:23:50.763Z</published>
-    <updated>2020-06-24T06:59:04.277Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>随着业务的发展，公司的服务需要对某些接口进行限流或者根据某些属性对请求进行限制。之前的方式是将黑白名单存储在数据库或者配置中心，无法较快和方便得对请求进行限制。公司安排平台组进行相关的调研，调研的结果显示阿里开源的 Sentinel 最符合我们目前的需求。<br>根据文档，目前开源的版本v1.6.3无法在生产环境直接使用。根据公司目前的情况，我们只需要使用网关部分的功能，要进行以下几点改造。<br>1.监控数据的持久化。<br>2.网关流控规则和API组规则接入 Apollo 配置中心。<br>3.登录鉴权体系。<br>本文主要介绍在改造过程中的实践。</p><hr><h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><h4 id="Sentinel-网关限流架构"><a href="#Sentinel-网关限流架构" class="headerlink" title="Sentinel 网关限流架构"></a>Sentinel 网关限流架构</h4><p>在实践开始之前，先了解一下 Sentinel 网关限流的架构。如下图所示。</p><p><img src="https://pic.superbed.cn/item/5d65fb26451253d178f26bd3.png" alt=""></p><p>惠借准备将原先的 Zuul 1.x 网关升级成 Spring Cloud Gateway，本文就以Spring Cloud Gateway 为例，以下简称 SCG。SCG中需要加入sentinel适配SCG的jar包，并且在启动时加入一些配置参数。</p><ol><li>SCG启动时会向 Dashboard 服务请求API组规则和流控规则，加入到本机的配置中。</li><li>在请求经过SCG时会对请求进行统计和输出日志。</li><li>Dashboard 更新规则时会更新本地内存中的规则并推送至SCG。</li><li>Dashboard 会定时拉取SCG输出的日志的统计结果。</li></ol><h4 id="监控数据持久化"><a href="#监控数据持久化" class="headerlink" title="监控数据持久化"></a>监控数据持久化</h4><p>在上述架构图中，集成 Sentinel SCG jar包后，Sentinel 会在 SCG的过滤器中加入一个 SentinelGatewayFilter。对 SCG 请求的拦截就由这个过滤器来实现。具体监控数据的生成和输出由一系列的 Slot 负责，具体原理这里不展开叙述，因为本文主要描述生产环境使用的改造，有兴趣的同学可以搜一下 Sentinel 时间窗口。<br>原先的监控数据由 Dashboard 收集后存储在 Map 中，并且只存储五分钟内的数据，在 Dashboard 重启后监控数据就消失，这在生产环境中肯定是不能接受的。由于我们公司本身也有ES服务，这些数据又是个时序数据，自然而然就想到可以放入ES中进行持久化。<br>首先新建 ElasticsearchMetricsRepository 来实现 MetricsRepository 接口类。分别实现其中的 save、saveAll、queryByAppAndResourceBetween 和 listResourcesOfApp。在 MetricController、 MetricFetcher 中把自动注入的 MetricsRepository 加上 <code>@Qualifier(value = &quot;elasticsearchMetricsRepository&quot;)</code>。<br>还有另外一个点在于 Dashboard 查询监控数据进行展示时，开源的版本并不会将调用量为零的那段数据补齐，导致监控数据展示得非常奇怪。所以我们需要在查询监控数据接口对ES返回的数据进行补齐，让监控数据是连续的。<br>下图是改造完的监控。</p><p><img src="https://pic.superbed.cn/item/5d65fb8a451253d178f2785a.png" alt=""></p><h4 id="网关流控规则和-API-规则接入Apollo配置中心"><a href="#网关流控规则和-API-规则接入Apollo配置中心" class="headerlink" title="网关流控规则和 API 规则接入Apollo配置中心"></a>网关流控规则和 API 规则接入Apollo配置中心</h4><p>开源版本的 Sentinel 流控规则和API规则也都是内存态的，在 SCG 和 Dashboard 重启后也会消失。<br>我们原先的配置中心采用的就是 Apollo，Sentinel 刚好可以跟 Apollo 进行集成。实现 Dashboard 推送至 Apollo，Apollo 再推送至 SCG，SCG启动时也从 Apollo 进行加载。</p><h5 id="SCG方面"><a href="#SCG方面" class="headerlink" title="SCG方面"></a>SCG方面</h5><p>跟普通应用接入 Apollo 一样，在 Apollo 建立应用。同时需要新增两个特殊的 namespace，分别为 flow_rule 、 api_group。在SCG中加入 Sentinel的 Apollo 依赖，同时配置一般的 Apollo 参数。<br>然后需要对 Sentinel 的流控规则和API组规则加载方式进行修改。在 SentinelGatewayConfiguration 配置中加入如下两段代码</p><p><img src="https://pic.superbed.cn/item/5d65fb50451253d178f2710d.png" alt=""><br>后续加载规则分别从某 namespace 下的某 key 加载。</p><h5 id="Dashboard方面"><a href="#Dashboard方面" class="headerlink" title="Dashboard方面"></a>Dashboard方面</h5><p>Dashboard 这边本身 Sentinel 已经把普通应用的流控规则从 Apollo 加载的代码已经写好放在 test 目录下，但是没有实现网关的代码。其实也很简单，Sentinel 的数据加载和推送的方式本身就提供了较好的扩展性。我们只需要分别实现 DynamicGatewayRuleProvider 和 DynamicGatewayRulePublisher。<br>这里需要注意的一个点是 SCG 向 Dashboard 注册的 appName 最好和它本身在 Apollo 的 appId 保持一致。这样 DynamicGatewayRuleProvider在加载数据的时候直接用 appName 作为 appId 向 Apollo 请求配置。加载流控规则代码如下图所示。</p><p><img src="https://pic.superbed.cn/item/5d65fb50451253d178f2710d.png" alt=""></p><p>至于 DynamicGatewayRulePublisher 其实有两个过程，第一步是向Apollo更新数据，第二步是要求 Apollo 对该 namespace 进行发布。代码如下图所示。</p><p><img src="https://pic.superbed.cn/item/5d65fbf6451253d178f284e4.png" alt=""></p><p>这里面涉及到的 Apollo 开放平台的授权之类的过程（这次也发现这是Apollo的一个非常强大的功能，实际上可以有很多的应用，特别是在自动化方面）请参考 Apollo 的文档。<br>在这样的一个过程后很多同学应该能很自然而然地想到是不是可以在 Sentinel 或者其他监控工具监控到某些条件后自动地对 Apollo 的中的限流配置进行修改。是的，这也应该是我们以后的目标，做到限流的自动化和智能化。<br>随后还需要新增 GatewayApiControllerV2，GatewayFlowRuleControllerV2，基本上就是把原有的GatewayApiController、GatewayFlowRuleController复制过来， 然后分别注入 ApolloProvider 和  ApolloPublisher。<br>Controller 要改动的地方主要有两个，第一个将获取规则的方式从向SCG请求改为向 Apollo 请求，第二个是新增和修改规则先更新到 Apollo 再让Apollo 推送到 SCG。再将前端页面请求的路径指向新的 Controller。<br>下图是获取API规则的代码改造前和改造后区别。ApiDefinitionProvider 就是 DynamicGatewayApiDefinitionProvider 的从 Apollo 获取 API 规则的实现。<br><img src="https://puui.qpic.cn/fans_admin/0/3_1409075683_1567151625668/0" alt=""></p><p>此处还有个暗坑，一开始没注意到。本身Dashboard在新增规则时会生成一个ID，这个ID是个 AtomicLong, 随着Dashboard的重启自动就清空了，导致在重启后新增或修改规则会将ID=1的规则顶替。目前解决的办法是在新增和修改规则时加载目前的全部规则，然后在获取ID时获取当前全部规则的最大ID，从最大值开始递增。</p><h4 id="登录和鉴权"><a href="#登录和鉴权" class="headerlink" title="登录和鉴权"></a>登录和鉴权</h4><p>原先的登录和鉴权只提供了基础的登录功能且安全性很低。我们将其加入了公司的统一登录中心，实现了帐号密码及企业微信扫码登录和访问权限的控制。</p><hr><h3 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h3><p>Sentinel 的改造陆陆续续进行了半个多月，其中也遇到了不少了问题，基本上都得到了较好的解决。目前仅仅是生产环境能用的状态，还有很多功能尚未完善。在改造的过程中也对Sentinel的基本原理和架构有了较清晰的认识，为后续使用中解决问题提供了基础。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;随着业务的发展，公司的服务需要对某些接口进行限流或者根据某些属性对请求进行限制。之前的方式是将黑白名单存储在数据库或者配置中心，无法较快和方
-      
-    
-    </summary>
-    
-    
-      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
     
   </entry>
   
