@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-02-02T03:03:09.874Z</updated>
+  <updated>2021-02-02T03:03:20.028Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://xingcici.github.io/2021/02/01/https-encryption-negotiation-process.html"/>
     <id>http://xingcici.github.io/2021/02/01/https-encryption-negotiation-process.html</id>
     <published>2021-02-01T09:03:59.926Z</published>
-    <updated>2021-02-02T03:03:09.874Z</updated>
+    <updated>2021-02-02T03:03:20.028Z</updated>
     
     <content type="html"><![CDATA[<p>HTTPS协商过程中涉及两个角色：client、server。client 大部分情况下可以认为是浏览器。这里会省略去一些加密协议之类的东西。</p><p>1、client 生成随机数 client_random，发送给 server。</p><p>2、server 生成随机数 server_random，再加上证书和签名，返回给 client，证书中包含公钥。</p><p>3、client 对证书进行 hash 生成 hash 串，然后用浏览器内置的 CA 公钥对签名进行验证，对比 hash 串和签名验证结果。</p><p>4、client 再生成一个随机数，与 client_random和 server_random 一起生成一个 shared secret(最终加密用),  再对这次生成的随机数用公钥进行加密生成（pre-master key），发送给 server。同时发送一个用 shared secret 加密的验证消息。</p><p>5、server 对 pre-master key 用私钥进行解密，获得随机数，再用 client_random、server_random 一起也算出 shared secret，对 client 发送的验证消息进行验证。再回复 client 一个也用 shared secret 加密的数据，表示自己准备好了。</p><p>6、在后续的传输过程中，还会对传输内容进行摘要，来验证内容的完整性。</p>]]></content>
     
