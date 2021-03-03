@@ -17,18 +17,25 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>标签: Netty | 一方天地</title>
-  <meta name="description" content="记录生活学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一方天地">
-<meta property="og:url" content="http://xingcici.github.io/tags/Netty/index.html">
+  <title>rocketmq第一次拉取消息获取位点失败导致位点回退的问题 | 一方天地</title>
+  <meta name="description" content="昨天业务同学反馈说某个 topic 的某个 Queue 发生了消息堆积，看了下其他 Queue 都是正常的，就这一个 Queue 发生了堆积，而且位点是三天前。 1234567891011121314151617181920212223client日志2021-03-02 15:15:12 WARN PullMessageService - invokeSync: wait response ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rocketmq第一次拉取消息获取位点失败导致位点回退的问题">
+<meta property="og:url" content="http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html">
 <meta property="og:site_name" content="一方天地">
-<meta property="og:description" content="记录生活学习">
+<meta property="og:description" content="昨天业务同学反馈说某个 topic 的某个 Queue 发生了消息堆积，看了下其他 Queue 都是正常的，就这一个 Queue 发生了堆积，而且位点是三天前。 1234567891011121314151617181920212223client日志2021-03-02 15:15:12 WARN PullMessageService - invokeSync: wait response ti">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181900213.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181922023.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181947327.png">
+<meta property="article:published_time" content="2021-03-03T10:16:13.134Z">
+<meta property="article:modified_time" content="2021-03-03T10:20:29.255Z">
 <meta property="article:author" content="行词">
+<meta property="article:tag" content="RocketMQ">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181900213.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://xingcici.github.io/tags/Netty/index.html">
+  <link rel="canonical" href="http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html">
   
     <link rel="alternate" href="/atom.xml" title="一方天地" type="application/atom+xml">
   
@@ -296,108 +303,158 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-tags post-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">标签: Netty</h1>
-      <p class="text-muted hidden-xs">共 2 篇文章</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/tags">All</a></li>
-          
-          <li><a href="/tags/算法/">算法</a></li>
-          
-          <li><a href="/tags/linux/">linux</a></li>
-          
-          <li><a href="/tags/Zookeeper/">Zookeeper</a></li>
-          
-          <li><a href="/tags/网络/">网络</a></li>
-          
-          <li><a href="/tags/Netty/">Netty</a></li>
-          
-          <li><a href="/tags/dubbo/">dubbo</a></li>
-          
-          <li><a href="/tags/RocketMQ/">RocketMQ</a></li>
-          
-          <li><a href="/tags/反射/">反射</a></li>
-          
-          <li><a href="/tags/JDK/">JDK</a></li>
-          
-          <li><a href="/tags/密码学/">密码学</a></li>
-          
-          <li><a href="/tags/链路追踪/">链路追踪</a></li>
-          
-          <li><a href="/tags/hadoop/">hadoop</a></li>
-          
-          <li><a href="/tags/MQ/">MQ</a></li>
-          
-          <li><a href="/tags/jdk/">jdk</a></li>
-          
-          <li><a href="/tags/https/">https</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="row">
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-rocketmq第一次拉取消息获取位点失败导致位点回退的问题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
         
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-06-18T03:48:20.319Z" itemprop="datePublished">2020-06-18</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/06/18/simple-use-of-sofabolt.html">Sofa-bolt的简单使用</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" class="label label-default mb">网络</a>
-     
-      <a href="/tags/Netty/" class="label label-default mb">Netty</a>
-     
-     
-   </div>
-   
-</article>
+  
+    <h1 class="article-title" itemprop="name">
+      rocketmq第一次拉取消息获取位点失败导致位点回退的问题
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html" class="article-date">
+	  <time datetime="2021-03-03T10:16:13.134Z" itemprop="datePublished">2021-03-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/RocketMQ/" rel="tag">RocketMQ</a>
+  </span>
 
 
-</div>
-
-<div class="col-md-6">
-    
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2020-06-16T02:57:12.287Z" itemprop="datePublished">2020-06-16</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2020/06/16/sofabolt-source-reading.html">Sofa-bolt源码阅读</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" class="label label-default mb">网络</a>
-     
-      <a href="/tags/Netty/" class="label label-default mb">Netty</a>
-     
-     
-   </div>
-   
-</article>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
 
-</div>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 640(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
 
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>昨天业务同学反馈说某个 topic 的某个 Queue 发生了消息堆积，看了下其他 Queue 都是正常的，就这一个 Queue 发生了堆积，而且位点是三天前。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">client日志</span><br><span class="line"></span><br><span class="line">2021-03-02 15:15:12 WARN PullMessageService - invokeSync: wait response timeout exception, the channel[brokerip:10911]</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientWorkerThread_2 - receive response, but not matched any request, brokerip:10911</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientWorkerThread_2 - RemotingCommand [code&#x3D;0, language&#x3D;JAVA, version&#x3D;317, opaque&#x3D;6774, flag(B)&#x3D;1, remark&#x3D;null, extFields&#x3D;&#123;offset&#x3D;5757922&#125;, serializeTypeCurrentRPC&#x3D;JSON]</span><br><span class="line">2021-03-02 15:15:12 WARN PullMessageService - fetchConsumeOffsetFromBroker exception, MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queueId&#x3D;10]</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientPublicExecutor_3 - the pull request offset illegal, PullRequest [consumerGroup&#x3D;ts_biz_operation_group, messageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-0</span><br><span class="line">6, queueId&#x3D;10], nextOffset&#x3D;-1] PullResult [pullStatus&#x3D;OFFSET_ILLEGAL, nextBeginOffset&#x3D;5531762, minOffset&#x3D;5531762, maxOffset&#x3D;5757977, msgFoundList&#x3D;0]</span><br><span class="line">2021-03-02 15:15:22 WARN PullMessageServiceScheduledThread - unlock messageQueue. group:ts_biz_operation_group, clientId:clientip@30487, mq:MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queue</span><br><span class="line">Id&#x3D;10]</span><br><span class="line">2021-03-02 15:15:22 WARN PullMessageServiceScheduledThread - fix the pull request offset, PullRequest [consumerGroup&#x3D;ts_biz_operation_group, messageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker</span><br><span class="line">-06, queueId&#x3D;10], nextOffset&#x3D;5531762]</span><br><span class="line">2021-03-02 15:15:45 WARN PullMessageService - the consumer message buffer is full, so do flow control, minOffset&#x3D;5531803, maxOffset&#x3D;5532809, size&#x3D;1008, pullRequest&#x3D;PullRequest [consumerGroup&#x3D;ts_biz_operation_group, me</span><br><span class="line">ssageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queueId&#x3D;10], nextOffset&#x3D;5532810], flowControlTimes&#x3D;1</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">broker日志</span><br><span class="line"></span><br><span class="line">broker.log:2021-03-02 15:15:12 INFO PullMessageThread_5 - the request offset too small. group&#x3D;ts_biz_operation_group, topic&#x3D;tp_inner_order_operation, requestOffset&#x3D;-1, brokerMinOffset&#x3D;5531762, clientIp&#x3D;&#x2F;clientip:24944</span><br><span class="line">broker.log:2021-03-02 15:15:12 WARN PullMessageThread_5 - PULL_OFFSET_MOVED:correction offset. topic&#x3D;tp_inner_order_operation, groupId&#x3D;ts_biz_operation_group, requestOffset&#x3D;-1, newOffset&#x3D;5531762, suggestBrokerId&#x3D;0</span><br><span class="line">broker.log:2021-03-02 15:15:22 WARN ConsumerManageThread_15 - [NOTIFYME]update consumer offset less than store. clientHost&#x3D;clientip:24944, key&#x3D;tp_inner_order_operation@ts_biz_operation_group, queueId&#x3D;10, requestOffset&#x3D;5531762, storeOffset&#x3D;5757922</span><br><span class="line">store.log:2021-03-02 04:54:08 INFO StoreScheduledThread1 - Compute logical min offset: 5531762, topic: tp_inner_order_operation, queueId: 10</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181900213.png" alt="image-20210303181900213"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181922023.png" alt="image-20210303181922023"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181947327.png" alt="image-20210303181947327"></p>
+<p>结合上面的日志和 rocketmq 的代码。基本可以推断出事情是这样发生的。</p>
+<ol>
+<li><p>160 这台服务器进行发布，客户端初始化，向 broker 拉取位点（请求1）。</p>
+</li>
+<li><p>这次请求超时，客户端把 offset = -1 当做 PullRequest 参数发从给 broker（请求2）。</p>
+</li>
+<li><p>请求1 已经返回了，但是因为 rmq client 的 fastfail 机制对应的 request 已经不存在了。</p>
+</li>
+<li><p>broker 收到请求2，内部逻辑是当请求的 offset = -1 的时候，返回该 topic 当前还存在的文件的最小 offset 55w。</p>
+</li>
+<li><p>client 收到最小 offset 再拉取消息，把 broker 的保存的之前的位点 57w 覆盖了。</p>
+</li>
+</ol>
+<p>大概的逻辑就是这样，就是感觉这部分其实有点优化空间，不太理解 RMQ 为什么不拿之前保存在 map 里的位点返回，而是直接返回最小。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html" title="rocketmq第一次拉取消息获取位点失败导致位点回退的问题" target="_blank" rel="external">http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xingcici" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xingcici" target="_blank"><span class="text-dark">行词</span><small class="ml-1x">中间件</small></a></h3>
+        <div>混迹互联网行业将近三年，业务和中间件都有涉猎，目前专注于中间件领域。欢迎探讨问题，联系邮箱 haifeng.pang@foxmail.com。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/02/01/https-encryption-negotiation-process.html" title="HTTPS 加密协商过程"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -454,6 +511,39 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'x9owKjybloVuPGfhRfqicCp7-gzGzoHsz',
+    appKey: 'latjez4p0BqCqKM14wXbCg0b',
+    placeholder: '欢迎交流~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 

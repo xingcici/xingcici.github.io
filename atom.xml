@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xingcici.github.io/"/>
-  <updated>2021-02-02T03:03:20.028Z</updated>
+  <updated>2021-03-03T10:20:29.255Z</updated>
   <id>http://xingcici.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rocketmq第一次拉取消息获取位点失败导致位点回退的问题</title>
+    <link href="http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html"/>
+    <id>http://xingcici.github.io/2021/03/03/the-problem-that-rocketmq-failed-to-pull-message-for-first-time-obtain-site-caused-fall-back.html</id>
+    <published>2021-03-03T10:16:13.134Z</published>
+    <updated>2021-03-03T10:20:29.255Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天业务同学反馈说某个 topic 的某个 Queue 发生了消息堆积，看了下其他 Queue 都是正常的，就这一个 Queue 发生了堆积，而且位点是三天前。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">client日志</span><br><span class="line"></span><br><span class="line">2021-03-02 15:15:12 WARN PullMessageService - invokeSync: wait response timeout exception, the channel[brokerip:10911]</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientWorkerThread_2 - receive response, but not matched any request, brokerip:10911</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientWorkerThread_2 - RemotingCommand [code&#x3D;0, language&#x3D;JAVA, version&#x3D;317, opaque&#x3D;6774, flag(B)&#x3D;1, remark&#x3D;null, extFields&#x3D;&#123;offset&#x3D;5757922&#125;, serializeTypeCurrentRPC&#x3D;JSON]</span><br><span class="line">2021-03-02 15:15:12 WARN PullMessageService - fetchConsumeOffsetFromBroker exception, MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queueId&#x3D;10]</span><br><span class="line">2021-03-02 15:15:12 WARN NettyClientPublicExecutor_3 - the pull request offset illegal, PullRequest [consumerGroup&#x3D;ts_biz_operation_group, messageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-0</span><br><span class="line">6, queueId&#x3D;10], nextOffset&#x3D;-1] PullResult [pullStatus&#x3D;OFFSET_ILLEGAL, nextBeginOffset&#x3D;5531762, minOffset&#x3D;5531762, maxOffset&#x3D;5757977, msgFoundList&#x3D;0]</span><br><span class="line">2021-03-02 15:15:22 WARN PullMessageServiceScheduledThread - unlock messageQueue. group:ts_biz_operation_group, clientId:clientip@30487, mq:MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queue</span><br><span class="line">Id&#x3D;10]</span><br><span class="line">2021-03-02 15:15:22 WARN PullMessageServiceScheduledThread - fix the pull request offset, PullRequest [consumerGroup&#x3D;ts_biz_operation_group, messageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker</span><br><span class="line">-06, queueId&#x3D;10], nextOffset&#x3D;5531762]</span><br><span class="line">2021-03-02 15:15:45 WARN PullMessageService - the consumer message buffer is full, so do flow control, minOffset&#x3D;5531803, maxOffset&#x3D;5532809, size&#x3D;1008, pullRequest&#x3D;PullRequest [consumerGroup&#x3D;ts_biz_operation_group, me</span><br><span class="line">ssageQueue&#x3D;MessageQueue [topic&#x3D;tp_inner_order_operation, brokerName&#x3D;broker-06, queueId&#x3D;10], nextOffset&#x3D;5532810], flowControlTimes&#x3D;1</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">broker日志</span><br><span class="line"></span><br><span class="line">broker.log:2021-03-02 15:15:12 INFO PullMessageThread_5 - the request offset too small. group&#x3D;ts_biz_operation_group, topic&#x3D;tp_inner_order_operation, requestOffset&#x3D;-1, brokerMinOffset&#x3D;5531762, clientIp&#x3D;&#x2F;clientip:24944</span><br><span class="line">broker.log:2021-03-02 15:15:12 WARN PullMessageThread_5 - PULL_OFFSET_MOVED:correction offset. topic&#x3D;tp_inner_order_operation, groupId&#x3D;ts_biz_operation_group, requestOffset&#x3D;-1, newOffset&#x3D;5531762, suggestBrokerId&#x3D;0</span><br><span class="line">broker.log:2021-03-02 15:15:22 WARN ConsumerManageThread_15 - [NOTIFYME]update consumer offset less than store. clientHost&#x3D;clientip:24944, key&#x3D;tp_inner_order_operation@ts_biz_operation_group, queueId&#x3D;10, requestOffset&#x3D;5531762, storeOffset&#x3D;5757922</span><br><span class="line">store.log:2021-03-02 04:54:08 INFO StoreScheduledThread1 - Compute logical min offset: 5531762, topic: tp_inner_order_operation, queueId: 10</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181900213.png" alt="image-20210303181900213"></p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181922023.png" alt="image-20210303181922023"></p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/image-20210303181947327.png" alt="image-20210303181947327"></p><p>结合上面的日志和 rocketmq 的代码。基本可以推断出事情是这样发生的。</p><ol><li><p>160 这台服务器进行发布，客户端初始化，向 broker 拉取位点（请求1）。</p></li><li><p>这次请求超时，客户端把 offset = -1 当做 PullRequest 参数发从给 broker（请求2）。</p></li><li><p>请求1 已经返回了，但是因为 rmq client 的 fastfail 机制对应的 request 已经不存在了。</p></li><li><p>broker 收到请求2，内部逻辑是当请求的 offset = -1 的时候，返回该 topic 当前还存在的文件的最小 offset 55w。</p></li><li><p>client 收到最小 offset 再拉取消息，把 broker 的保存的之前的位点 57w 覆盖了。</p></li></ol><p>大概的逻辑就是这样，就是感觉这部分其实有点优化空间，不太理解 RMQ 为什么不拿之前保存在 map 里的位点返回，而是直接返回最小。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;昨天业务同学反馈说某个 topic 的某个 Queue 发生了消息堆积，看了下其他 Queue 都是正常的，就这一个 Queue 发生了堆积，而且位点是三天前。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://xingcici.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+      <category term="RocketMQ" scheme="http://xingcici.github.io/tags/RocketMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTPS 加密协商过程</title>
@@ -518,32 +545,6 @@
     
       <category term="架构设计" scheme="http://xingcici.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>dubbo调用在2.7.5版本以下的性能问题的解决</title>
-    <link href="http://xingcici.github.io/2020/06/11/dubbo-call-to-solve-performance-problems-below-version-275.html"/>
-    <id>http://xingcici.github.io/2020/06/11/dubbo-call-to-solve-performance-problems-below-version-275.html</id>
-    <published>2020-06-11T02:26:30.501Z</published>
-    <updated>2020-06-24T06:59:04.285Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44个，平均每个JOB耗时22毫秒。这还是在已经分片的情况下。</p><p>如果只是 dubbo 调用就要这么久肯定不正常。于是进行排查。</p><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>理论上最耗时的点应该是在远程调用的过程，也就是网络延迟。在日常环境用arthas抓取方法耗时，发现耗时的过程反而是在</p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/652BE8F3-6A34-467F-BCE0-5362B40E1E93.png" alt="652BE8F3-6A34-467F-BCE0-5362B40E1E93"></p><p>这个方法上。</p><p>用 arthas 抓的图如图所示。</p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/9C1437EC-09DE-4039-9800-C68D1591701D.png" alt="9C1437EC-09DE-4039-9800-C68D1591701D"></p><p>可以看到 config.get 这个方法远大于或者接近实际调用过程。理论上对这个点进行优化可以至少提升一倍的性能。</p><h3 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h3><p>继续分析 get 方法，其内部耗时主要还是在 checkAndUpdateSubConfigs(); 这个方法。</p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/A0BCC225-A330-45BB-AC2F-4C73EB38AABB.png" alt="A0BCC225-A330-45BB-AC2F-4C73EB38AABB"></p><p>这个方法主要是获取刷新各种配置。而且由于我们没有用新版的dubbo配置中心，导致每调一次GET会打一次warn日志<img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B.png" alt="42EDB6B8-5D43-4E59-BD73-D5F22C7CB69B"></p><p>于是考虑要不在get 做个缓存来解决。但是在解决之前也查一下有没有其他人碰到这个问题，结果还真有。他们解决的办法是升级dubbo 版本。apache 2.7.5 版本</p><p>就解决了这个性能问题，将 checkAndUpdateSubConfigs 丢到 init 方法里，只在 init 的时候调用一次。</p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/1FFB477A-6B66-4741-8918-854868F7642B.png" alt="1FFB477A-6B66-4741-8918-854868F7642B"></p><p>不过由于升级 dubbo 核心版本没那么容易，于是暂时就在 get 外层做了个缓存来解决。</p><p>下图是修改后的耗时，可以看到耗时基本只剩调用这块。具体的性能提升多少等待后续的测试。</p><p><img src="https://cdn.jsdelivr.net/gh/xingcici/oss@master/uPic/8015F365-6DDC-4F48-BAB3-60BAF289208A.png" alt="8015F365-6DDC-4F48-BAB3-60BAF289208A"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;toc 的监控在日常环境测试时，发现日常环境在大量JOB需要调度的情况下，发现三台机器调度的瓶颈大概为8k每分钟，也就是一台机器每秒处理44
-      
-    
-    </summary>
-    
-    
-      <category term="日常问题" scheme="http://xingcici.github.io/categories/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98/"/>
-    
-    
-      <category term="dubbo" scheme="http://xingcici.github.io/tags/dubbo/"/>
     
   </entry>
   
